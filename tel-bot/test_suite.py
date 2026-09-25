@@ -68,7 +68,7 @@ class ResourceDataTests(unittest.TestCase):
         specialty = ACADEMIC_DATA["ST"]["years"][3]["specialties"]["ENER_GH"]
         self.assertEqual(specialty["label"], "ENER & GH — Renewable Energies & Green Hydrogen")
         drives = specialty["categories"]["drives"]
-        self.assertEqual(len(drives), 3)
+        self.assertEqual(len(drives), 4)
         self.assertTrue(all(item["url"] for item in drives))
         # ENER and GH aliases in year 3 resolve to ENER_GH
         self.assertEqual(ACADEMIC_DATA["ST"]["years"][3]["specialties"]["ENER"], specialty)
@@ -196,6 +196,22 @@ class ResourceDataTests(unittest.TestCase):
         self.assertIn("getintopc.com", by_title["Apache NetBeans"])
         self.assertIn("getintopc.com", by_title["Cisco Packet Tracer"])
         self.assertIn("getintopc.com", by_title["MATLAB"])
+
+    def test_re2sd_channel_in_all_three_years_of_gh(self) -> None:
+        # Year 3 (ENER_GH / GH)
+        y3_gh = ACADEMIC_DATA["ST"]["years"][3]["specialties"]["GH"]
+        y3_drives = y3_gh["categories"]["drives"]
+        self.assertTrue(any(item["url"] == "https://t.me/RE2SD" for item in y3_drives))
+
+        # Year 4 GH
+        y4_gh = ACADEMIC_DATA["ST"]["years"][4]["specialties"]["GH"]
+        y4_drives = y4_gh["categories"]["drives"]
+        self.assertTrue(any(item["url"] == "https://t.me/RE2SD" for item in y4_drives))
+
+        # Year 5 GH
+        y5_gh = ACADEMIC_DATA["ST"]["years"][5]["specialties"]["GH"]
+        y5_drives = y5_gh["categories"]["drives"]
+        self.assertTrue(any(item["url"] == "https://t.me/RE2SD" for item in y5_drives))
 
 
 class NavigationContractTests(unittest.TestCase):

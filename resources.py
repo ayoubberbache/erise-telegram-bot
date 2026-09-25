@@ -159,6 +159,14 @@ def _second_year_prepa_drives() -> list[Resource]:
     ]
 
 
+def _gh_channel_resource() -> Resource:
+    return resource(
+        "Channel RE2SD — Green Hydrogen",
+        "https://t.me/RE2SD",
+        "Telegram academic resource channel for Green Hydrogen students.",
+    )
+
+
 def _third_year_enr_drives() -> list[Resource]:
     return [
         resource(
@@ -176,6 +184,7 @@ def _third_year_enr_drives() -> list[Resource]:
             "https://t.me/third_year_renewable_energies",
             "Telegram resource channel for 3rd Year Renewable Energies & Green Hydrogen, 2025/2026.",
         ),
+        _gh_channel_resource(),
     ]
 
 
@@ -584,6 +593,7 @@ ACADEMIC_DATA: Final[dict[str, dict[str, object]]] = {
                             key,
                             year=4,
                             internal_drives={
+                                "GH": [_gh_channel_resource(), *_internal_drives()],
                                 "IRIIA": _fourth_year_IRIIA_drives(),
                                 "GE": _fourth_year_GE_drives(),
                             }.get(key),
@@ -597,7 +607,13 @@ ACADEMIC_DATA: Final[dict[str, dict[str, object]]] = {
                 "specialties": {
                     key: {
                         "label": label,
-                        "categories": _specialty_categories(key, year=5),
+                        "categories": _specialty_categories(
+                            key,
+                            year=5,
+                            internal_drives={
+                                "GH": [_gh_channel_resource(), *_internal_drives()],
+                            }.get(key),
+                        ),
                     }
                     for key, label in SPECIALTY_LABELS.items()
                 },
