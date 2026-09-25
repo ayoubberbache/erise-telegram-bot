@@ -25,6 +25,19 @@ LOGGER = logging.getLogger(__name__)
 TOKEN_ENV = "TELEGRAM_BOT_TOKEN"
 MAX_CALLBACK_BYTES = 64
 MI_INACTIVE_MESSAGE = "MI was newly opened; only 1st Year is currently active."
+EMPTY_BUTTON_MODE_ENV = "EMPTY_BUTTON_MODE"
+
+# Toggle mode: "disappear" (hide buttons with no content) or "grey" (dimmed button)
+_EMPTY_BUTTON_MODE = os.getenv(EMPTY_BUTTON_MODE_ENV, "disappear").lower()
+
+
+def get_empty_button_mode() -> str:
+    return _EMPTY_BUTTON_MODE
+
+
+def set_empty_button_mode(mode: str) -> None:
+    global _EMPTY_BUTTON_MODE
+    _EMPTY_BUTTON_MODE = mode.lower()
 
 
 
@@ -65,14 +78,36 @@ def _years_keyboard(branch: str) -> InlineKeyboardMarkup:
     return InlineKeyboardMarkup(_rows(buttons))
 
 
+def _category_has_content(
+    branch: str, year: int, category: str, specialty: str | None = None
+) -> bool:
+    year_data = ACADEMIC_DATA[branch]["years"][year]
+    if specialty:
+        resources = year_data["specialties"][specialty]["categories"].get(category, [])
+    else:
+        resources = year_data["categories"].get(category, [])
+    return any(bool(item.get("url")) for item in resources)
+
+
 def _category_keyboard(
     branch: str, year: int, specialty: str | None = None
 ) -> InlineKeyboardMarkup:
     specialty_parts = [specialty] if specialty else []
-    buttons = [
-        _button(label, _callback("c", branch, str(year), *specialty_parts, key))
-        for key, label in CATEGORY_LABELS.items()
-    ]
+    mode = get_empty_button_mode()
+    buttons: list[InlineKeyboardButton] = []
+    for key, label in CATEGORY_LABELS.items():
+        if _category_has_content(branch, year, key, specialty):
+            buttons.append(
+                _button(label, _callback("c", branch, str(year), *specialty_parts, key))
+            )
+        else:
+            if mode == "grey":
+                buttons.append(_button(f"▫️ {label} (Empty)", _callback("e", key)))
+            # If mode == "disappear", the button is omitted!
+
+    if not buttons and mode == "disappear":
+        buttons.append(_button("▫️ No categories available yet", _callback("e", "none")))
+
     if specialty:
         back = _callback("y", branch, str(year))
     else:
@@ -100,24 +135,27 @@ def _resource_keyboard(
     specialty: str | None = None,
 ) -> InlineKeyboardMarkup:
     specialty_parts = [specialty] if specialty else []
+    mode = get_empty_button_mode()
     buttons: list[InlineKeyboardButton] = []
     for index, item in enumerate(resources):
-        if item["url"]:
+        if item.get("url"):
             buttons.append(InlineKeyboardButton(item["title"], url=item["url"]))
         else:
-            buttons.append(
-                _button(
-                    f"{item['title']} · pending",
-                    _callback(
-                        "n",
-                        branch,
-                        str(year),
-                        *specialty_parts,
-                        category,
-                        str(index),
-                    ),
+            if mode == "grey":
+                buttons.append(
+                    _button(
+                        f"▫️ {item['title']} · pending",
+                        _callback(
+                            "n",
+                            branch,
+                            str(year),
+                            *specialty_parts,
+                            category,
+                            str(index),
+                        ),
+                    )
                 )
-            )
+            # If mode == "disappear", the button is omitted!
     back = _callback("s", branch, str(year), specialty) if specialty else _callback("y", branch, str(year))
     buttons.append(_button("Back", back))
     return InlineKeyboardMarkup(_rows(buttons))
@@ -184,6 +222,13 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
     if action == "n":
         await query.answer(
             "This resource is not configured yet. Add its URL in resources_data.py.",
+            show_alert=True,
+        )
+        return
+
+    if action == "e":
+        await query.answer(
+            "No resources have been uploaded yet for this category.",
             show_alert=True,
         )
         return
@@ -265,6 +310,25 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
         await update.message.reply_text(text, parse_mode=ParseMode.MARKDOWN)
 
 
+async def toggle_empty_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    del context
+    current = get_empty_button_mode()
+    new_mode = "grey" if current == "disappear" else "disappear"
+    set_empty_button_mode(new_mode)
+    if update.message:
+        if new_mode == "disappear":
+            text = (
+                "🔘 *Empty Button Mode: Disappear*\n\n"
+                "Categories and resources with no content will now be hidden completely."
+            )
+        else:
+            text = (
+                "🔘 *Empty Button Mode: Grey*\n\n"
+                "Categories and resources with no content will now appear greyed out (`▫️ Empty`)."
+            )
+        await update.message.reply_text(text, parse_mode=ParseMode.MARKDOWN)
+
+
 async def about_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     del context
     if update.message:
@@ -288,6 +352,7 @@ def create_application() -> Application:
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CommandHandler("help", help_command))
     application.add_handler(CommandHandler("about", about_command))
+    application.add_handler(CommandHandler("toggle_empty", toggle_empty_command))
     application.add_handler(CallbackQueryHandler(handle_callback))
     return application
 

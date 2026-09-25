@@ -68,32 +68,72 @@ def _internal_drives() -> list[Resource]:
     ]
 
 
+def _first_year_st_drives() -> list[Resource]:
+    return [
+        resource(
+            "Group Promo 2026/2027",
+            "https://t.me/+9nAvFiCXiR9lMTg0",
+            "Telegram group for 1st Year ST students, 2026/2027.",
+        ),
+        resource(
+            "Group Promo 2025/2026",
+            "https://t.me/+RJmZC1MMmiNhMzJk",
+            "Telegram topic with academic resources for 1st Year ST, 2025/2026.",
+        ),
+        resource(
+            "Group Promo 2024/2025",
+            "https://t.me/hns1year",
+            "Telegram main resource channel for 1st Year ST, Promo 2024/2025.",
+        ),
+    ]
+
+
 def _second_year_prepa_drives() -> list[Resource]:
     return [
         resource(
-            "2025/2026",
+            "Drive Promo 2025/2026",
             "https://drive.google.com/drive/folders/1ToQnuvoAWAfd_bEo1DLt3cROBIVCpByh",
             "Internal Drive for 2nd Year Prepa, 2025/2026.",
         ),
         resource(
-            "2025/2024",
+            "Drive Promo 2024/2025",
             "https://drive.google.com/drive/folders/1B8SLw57KT80xQ8C3QQqin2vXB1T0QUxR",
-            "Internal Drive for 2nd Year Prepa, 2025/2024.",
+            "Internal Drive for 2nd Year Prepa, 2024/2025.",
         ),
         resource(
-            "2024/2023",
+            "Group Promo 2024/2025",
+            "https://t.me/c/2210715774/13149",
+            "Telegram main resource channel for 2nd Year Prepa, Promo 2024/2025.",
+        ),
+        resource(
+            "Drive Promo 2023/2024 ver 1",
             "https://drive.google.com/drive/folders/1-R-y0KMxJbLyflWd2-2f_TAOj7UPiVPK",
-            "Internal Drive for 2nd Year Prepa, 2024/2023.",
+            "Internal Drive (Version 1) for 2nd Year Prepa, 2023/2024.",
         ),
         resource(
-            "2022/2023",
+            "Drive Promo 2023/2024 ver 2",
+            "https://drive.google.com/drive/folders/1Q22KdlSS6B9TzIi0RrozBeAQtobBpvFx?usp=drive_link",
+            "Internal Drive (Version 2) for 2nd Year Prepa, 2023/2024.",
+        ),
+        resource(
+            "Group Promo 2023/2024",
+            "https://t.me/doesntworkanyway/11",
+            "Telegram group discussion for 2nd Year Prepa, Promo 2023/2024.",
+        ),
+        resource(
+            "Drive Promo 2022/2023",
             "https://drive.google.com/drive/folders/1DJueVupxrf52OrKIM8_ABnf_h4J3Qz4E",
             "Internal Drive for 2nd Year Prepa, 2022/2023.",
         ),
         resource(
-            "Exam archives",
-            "",
-            "Add the shared Google Drive folder for archived 2nd Year Prepa exams.",
+            "Group Summaries — 2nd Prepa",
+            "https://t.me/summeries_2nd_prepa",
+            "Curated course summaries and revision materials for 2nd Year Prepa.",
+        ),
+        resource(
+            "Group External Resources — 2nd Prepa",
+            "https://t.me/hns2year/21932",
+            "External resources and exercises for 2nd Year Prepa.",
         ),
     ]
 
@@ -101,19 +141,19 @@ def _second_year_prepa_drives() -> list[Resource]:
 def _third_year_enr_drives() -> list[Resource]:
     return [
         resource(
-            "2022/2021 — 3rd year ENR",
+            "Drive Promo 2021/2022 — 3rd Year ENR",
             "https://drive.google.com/drive/folders/1LQNtlCJ1Khw6Z4tDkfsxaeEQkLGW0WG9",
-            "Internal Drive for 3rd Year Renewable Energies, 2022/2021.",
+            "Internal Drive for 3rd Year Renewable Energies, 2021/2022.",
         ),
         resource(
-            "2023/2024 — 3rd year ENR",
+            "Drive Promo 2023/2024 — 3rd Year ENR",
             "https://drive.google.com/drive/folders/1t9xszm0ORlveTo7jj0SOVQZMpoxo2wOA?usp=drive_link",
             "Internal Drive for 3rd Year Renewable Energies, 2023/2024.",
         ),
         resource(
-            "2026/2025 — 3rd year ENR",
+            "Group Promo 2025/2026 — 3rd Year ENR",
             "https://t.me/third_year_renewable_energies",
-            "Telegram resource channel for 3rd Year Renewable Energies, 2026/2025.",
+            "Telegram resource channel for 3rd Year Renewable Energies, 2025/2026.",
         ),
     ]
 
@@ -121,43 +161,136 @@ def _third_year_enr_drives() -> list[Resource]:
 def _third_year_IRIIA_drives() -> list[Resource]:
     return [
         resource(
-            "2025/2024 — 3rd year IRIIA",
-            "https://drive.google.com/drive/folders/1gK46myB5nJSGeUuYXUszM5eU25JudwgI?usp=drive_link",
-            "Internal Drive for 3rd Year IRIIA, 2025/2024.",
+            "Drive Promo 2025/2026 — 3rd Year IRIIA",
+            "https://drive.google.com/drive/folders/1b2hM-zY42b64FBk1ubHxU8kbN_QO2O9A?usp=sharing",
+            "Internal Drive for 3rd Year IRIIA, Promo 2025/2026.",
         ),
         resource(
-            "2026/2025 — 3rd year IRIIA",
-            "https://drive.google.com/drive/folders/1b2hM-zY42b64FBk1ubHxU8kbN_QO2O9A?usp=sharing",
-            "Internal Drive for 3rd Year IRIIA, 2026/2025.",
+            "Drive Promo 2024/2025 — 3rd Year IRIIA",
+            "https://drive.google.com/drive/folders/1gK46myB5nJSGeUuYXUszM5eU25JudwgI?usp=drive_link",
+            "Internal Drive for 3rd Year IRIIA, Promo 2024/2025.",
         ),
     ]
 
 
-def _first_year_ST_drives() -> list[Resource]:
+def _fourth_year_IRIIA_drives() -> list[Resource]:
     return [
         resource(
-            "2027/2026 — 1st year ST",
-            "https://t.me/+9nAvFiCXiR9lMTg0",
-            "Telegram Group for 1st year students, 2027/2026.",
+            "Drive Promo 2025/2026 — 4th Year IRIIA",
+            "https://drive.google.com/drive/folders/1CFjLVg5w1NV8mrUP6n_983rL8vuYPTjj?usp=sharing",
+            "Internal Drive for 4th Year IRIIA, Promo 2025/2026.",
         ),
         resource(
-            "2026/2025 — 1st year ST",
-            "https://t.me/doesntworkanyway",
-            "Telegram Group for 1st year students, 2026/2025.",
+            "Drive Promo 2023/2024 — 4th Year IRIIA",
+            "https://drive.google.com/drive/folders/1_tPjRFBIkS7cPBVcsYt-dbW8dsJyQ0-F?usp=sharing",
+            "Internal Drive for 4th Year IRIIA, Promo 2023/2024.",
+        ),
+    ]
+
+
+def _third_year_GE_drives() -> list[Resource]:
+    return [
+        resource(
+            "Drive 1st Promo — 3rd & 4th Year GE",
+            "https://drive.google.com/drive/folders/1eWj9VE5y1uv9-t-sKmKzVvJwBjfS4woE",
+            "Shared Google Drive folder for 1st Promo (3rd & 4th Year Electrical Engineering).",
+        ),
+        resource(
+            "Group 3rd Promo — 3rd Year GE",
+            "https://t.me/electricalenghns",
+            "Telegram resource channel/group for 3rd Promo (3rd Year Electrical Engineering).",
+        ),
+    ]
+
+
+def _fourth_year_GE_drives() -> list[Resource]:
+    return [
+        resource(
+            "Drive 2nd Promo — 4th Year GE",
+            "https://drive.google.com/drive/folders/1CjyzxvOEp5K-EDDEe6Rh-MpPz5TcCPrJ",
+            "Internal Drive for 2nd Promo (4th Year Electrical Engineering).",
+        ),
+        resource(
+            "Drive 1st Promo — 3rd & 4th Year GE",
+            "https://drive.google.com/drive/folders/1eWj9VE5y1uv9-t-sKmKzVvJwBjfS4woE",
+            "Shared Google Drive folder for 1st Promo (3rd & 4th Year Electrical Engineering).",
         ),
     ]
 
 
 def _external_drives() -> list[Resource]:
     return [
+        resource(
+            "National Contest Preparation (Concours ST)",
+            "https://t.me/concour_st",
+            "Telegram channel for national engineering concours preparation.",
+        ),
+        resource(
+            "External Resources — 2nd Prepa",
+            "https://t.me/hns2year/21932",
+            "Curated external resources and modules for 2nd Year Prepa.",
+        ),
         resource("Polytech resources", "", "Add the Polytech resource folder."),
         resource("USTHB resources", "", "Add the USTHB resource folder."),
         resource("ESI resources", "", "Add the ESI resource folder."),
+    ]
+
+
+def _overleaf_resource() -> Resource:
+    return resource(
+        "Overleaf (LaTeX)",
+        "https://www.overleaf.com/",
+        "Collaborative cloud LaTeX editor for scientific papers, thesis, and reports.",
+    )
+
+
+def _matlab_resource() -> Resource:
+    return resource(
+        "MATLAB",
+        "https://getintopc.com/softwares/development/matlab-r2018b-free-download-6021288/",
+        "MATLAB software package download and installation entry point.",
+    )
+
+
+def _third_year_IRIIA_apps() -> list[Resource]:
+    return [
         resource(
-            "National contest preparation",
-            "",
-            "Add the folder for national contest preparation.",
+            "VS Code",
+            "https://code.visualstudio.com/download",
+            "Official Visual Studio Code editor download.",
         ),
+        resource(
+            "VirtualBox",
+            "https://www.virtualbox.org/wiki/Downloads",
+            "Oracle VM VirtualBox official download page for virtual machines.",
+        ),
+        resource(
+            "Ubuntu Desktop",
+            "https://ubuntu.com/download/desktop",
+            "Official Ubuntu Linux desktop ISO download for VMs and dual-boot.",
+        ),
+        resource(
+            "WSL Linux",
+            "https://learn.microsoft.com/en-us/windows/wsl/install",
+            "Microsoft official setup and install guide for Windows Subsystem for Linux.",
+        ),
+        resource(
+            "PyCharm",
+            "https://www.jetbrains.com/pycharm/download/",
+            "JetBrains official download page for PyCharm Python IDE.",
+        ),
+        resource(
+            "Apache NetBeans",
+            "https://netbeans.apache.org/front/main/download/",
+            "Official Apache NetBeans IDE download page for Java development.",
+        ),
+        resource(
+            "VUE (Mind Mapping)",
+            "https://vue.tufts.edu/",
+            "Tufts Visual Understanding Environment for concept mapping and mind maps.",
+        ),
+        _overleaf_resource(),
+        _matlab_resource(),
     ]
 
 
@@ -166,13 +299,9 @@ def _software_tools() -> list[Resource]:
         resource(
             "VS Code",
             "https://code.visualstudio.com/download",
-            "Official download page. Add installation notes to the description if needed.",
+            "Official download page. Code editor for all programming modules.",
         ),
-        resource(
-            "MATLAB",
-            "https://getintopc.com/softwares/development/matlab-r2018b-free-download-6021288/",
-            "Official MATLAB product page and download entry point.",
-        ),
+        _matlab_resource(),
         resource(
             "Intel Quartus Prime",
             "https://www.intel.com/content/www/us/en/software/programmable/quartus-prime/overview.html",
@@ -191,6 +320,38 @@ def _software_tools() -> list[Resource]:
     ]
 
 
+def _software_tools_for_specialty(specialty: str, year: int) -> list[Resource]:
+    if specialty == "IRIIA" and year == 3:
+        return _third_year_IRIIA_apps()
+
+    tools = [
+        _overleaf_resource(),
+        _matlab_resource(),
+        resource(
+            "VS Code",
+            "https://code.visualstudio.com/download",
+            "Official code editor for development.",
+        ),
+    ]
+    if specialty == "ENER":
+        tools.append(
+            resource(
+                "PVsyst",
+                "https://getintopc.com/softwares/simulation/pvsyst-2024-free-download/",
+                "Photovoltaic system design software.",
+            )
+        )
+    elif specialty in ("uE", "GE"):
+        tools.append(
+            resource(
+                "Intel Quartus Prime",
+                "https://www.intel.com/content/www/us/en/software/programmable/quartus-prime/overview.html",
+                "Official FPGA design software page.",
+            )
+        )
+    return tools
+
+
 def _youtube_playlists() -> list[Resource]:
     return [
         resource(
@@ -206,19 +367,28 @@ def _youtube_playlists() -> list[Resource]:
     ]
 
 
-def _categories(internal_drives: list[Resource] | None = None) -> CategoryMap:
+def _categories(
+    internal_drives: list[Resource] | None = None,
+    software_tools: list[Resource] | None = None,
+    external_drives: list[Resource] | None = None,
+) -> CategoryMap:
     return {
         "drives": internal_drives if internal_drives is not None else _internal_drives(),
-        "external": _external_drives(),
-        "apps": _software_tools(),
+        "external": external_drives if external_drives is not None else _external_drives(),
+        "apps": software_tools if software_tools is not None else _software_tools(),
         "youtube": _youtube_playlists(),
     }
 
 
 def _specialty_categories(
-    specialty: str, internal_drives: list[Resource] | None = None
+    specialty: str,
+    year: int = 3,
+    internal_drives: list[Resource] | None = None,
 ) -> CategoryMap:
-    categories = _categories(internal_drives)
+    categories = _categories(
+        internal_drives=internal_drives,
+        software_tools=_software_tools_for_specialty(specialty, year),
+    )
     categories["youtube"] = [
         resource(
             f"{specialty} course playlist",
@@ -245,10 +415,13 @@ ACADEMIC_DATA: Final[dict[str, dict[str, object]]] = {
         "label": "ST — Science & Technology",
         "active_years": [1, 2, 3, 4, 5],
         "years": {
-            1: {"label": "Year 1", "categories": _categories(_first_year_ST_drives())},
+            1: {
+                "label": "Year 1",
+                "categories": _categories(internal_drives=_first_year_st_drives()),
+            },
             2: {
                 "label": "Year 2 — Prepa",
-                "categories": _categories(_second_year_prepa_drives()),
+                "categories": _categories(internal_drives=_second_year_prepa_drives()),
             },
             3: {
                 "label": "Year 3 — Engineering Cycle",
@@ -257,9 +430,11 @@ ACADEMIC_DATA: Final[dict[str, dict[str, object]]] = {
                         "label": label,
                         "categories": _specialty_categories(
                             key,
-                            {
+                            year=3,
+                            internal_drives={
                                 "ENER": _third_year_enr_drives(),
                                 "IRIIA": _third_year_IRIIA_drives(),
+                                "GE": _third_year_GE_drives(),
                             }.get(key),
                         ),
                     }
@@ -271,7 +446,14 @@ ACADEMIC_DATA: Final[dict[str, dict[str, object]]] = {
                 "specialties": {
                     key: {
                         "label": label,
-                        "categories": _specialty_categories(key),
+                        "categories": _specialty_categories(
+                            key,
+                            year=4,
+                            internal_drives={
+                                "IRIIA": _fourth_year_IRIIA_drives(),
+                                "GE": _fourth_year_GE_drives(),
+                            }.get(key),
+                        ),
                     }
                     for key, label in SPECIALTY_LABELS.items()
                 },
@@ -281,7 +463,7 @@ ACADEMIC_DATA: Final[dict[str, dict[str, object]]] = {
                 "specialties": {
                     key: {
                         "label": label,
-                        "categories": _specialty_categories(key),
+                        "categories": _specialty_categories(key, year=5),
                     }
                     for key, label in SPECIALTY_LABELS.items()
                 },
