@@ -66,12 +66,9 @@ def _branch_keyboard() -> InlineKeyboardMarkup:
 
 def _years_keyboard(branch: str) -> InlineKeyboardMarkup:
     data = ACADEMIC_DATA[branch]
-    years = range(1, 6) if branch == "MI" else data["active_years"]
+    years = data["active_years"]
     buttons = [
-        _button(
-            f"Year {year}" + (" · inactive" if branch == "MI" and year != 1 else ""),
-            _callback("y", branch, str(year)),
-        )
+        _button(f"Year {year}", _callback("y", branch, str(year)))
         for year in years
     ]
     buttons.append(_button("Back", _callback("b", "root")))
@@ -268,6 +265,8 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
 
     if action == "s":
         branch, year, specialty = parts[1], int(parts[2]), parts[3]
+        if year == 3 and specialty in ("ENER", "GH") and "ENER_GH" in ACADEMIC_DATA[branch]["years"][3]["specialties"]:
+            specialty = "ENER_GH"
         await query.answer()
         await _edit(
             query,
@@ -283,6 +282,8 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
             specialty = None
         else:
             specialty, category = parts[3], parts[4]
+            if year == 3 and specialty in ("ENER", "GH") and "ENER_GH" in ACADEMIC_DATA[branch]["years"][3]["specialties"]:
+                specialty = "ENER_GH"
         await query.answer()
         text, resources = _resource_text(branch, year, category, specialty)
         await _edit(

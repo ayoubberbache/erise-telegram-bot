@@ -37,6 +37,32 @@ SPECIALTY_LABELS: Final[dict[str, str]] = {
     "GE": "GE — Electrical Engineering",
 }
 
+YEAR_3_SPECIALTY_LABELS: Final[dict[str, str]] = {
+    "IRIIA": "IRIIA — Intelligent Systems",
+    "uE": "µE — Microelectronics",
+    "ENER_GH": "ENER & GH — Renewable Energies & Green Hydrogen",
+    "GE": "GE — Electrical Engineering",
+}
+
+
+class Year3Specialties(dict):
+    """Specialties mapping for Year 3 ST where ENER and GH study together."""
+
+    def __getitem__(self, key: str) -> dict[str, object]:
+        if key in ("ENER", "GH") and not super().__contains__(key):
+            return super().__getitem__("ENER_GH")
+        return super().__getitem__(key)
+
+    def __contains__(self, key: object) -> bool:
+        if key in ("ENER", "GH"):
+            return super().__contains__("ENER_GH")
+        return super().__contains__(key)
+
+    def get(self, key: str, default: object = None) -> object:
+        if key in ("ENER", "GH") and not super().__contains__(key):
+            return super().get("ENER_GH", default)
+        return super().get(key, default)
+
 
 def _internal_drives() -> list[Resource]:
     return [
@@ -146,9 +172,9 @@ def _third_year_enr_drives() -> list[Resource]:
             "Internal Drive for 3rd Year Renewable Energies, 2023/2024.",
         ),
         resource(
-            "Group Promo 2025/2026 — 3rd Year ENR",
+            "Group Promo 2025/2026 — 3rd Year ENR & GH",
             "https://t.me/third_year_renewable_energies",
-            "Telegram resource channel for 3rd Year Renewable Energies, 2025/2026.",
+            "Telegram resource channel for 3rd Year Renewable Energies & Green Hydrogen, 2025/2026.",
         ),
     ]
 
@@ -261,8 +287,8 @@ def _third_year_IRIIA_apps() -> list[Resource]:
         ),
         resource(
             "VirtualBox",
-            "https://www.virtualbox.org/wiki/Downloads",
-            "Oracle VM VirtualBox official download page for virtual machines.",
+            "https://getintopc.com/softwares/virtualization/virtualbox-free-download/",
+            "Oracle VM VirtualBox installer from Get Into PC.",
         ),
         resource(
             "Ubuntu Desktop",
@@ -276,13 +302,13 @@ def _third_year_IRIIA_apps() -> list[Resource]:
         ),
         resource(
             "PyCharm",
-            "https://www.jetbrains.com/pycharm/download/",
-            "JetBrains official download page for PyCharm Python IDE.",
+            "https://getintopc.com/softwares/development/jetbrains-pycharm-pro-2023-free-download/",
+            "JetBrains PyCharm Professional IDE installer from Get Into PC.",
         ),
         resource(
             "Apache NetBeans",
-            "https://netbeans.apache.org/front/main/download/",
-            "Official Apache NetBeans IDE download page for Java development.",
+            "https://getintopc.com/softwares/development/netbeans-ide-free-download/",
+            "Apache NetBeans IDE installer from Get Into PC.",
         ),
         resource(
             "VUE (Mind Mapping)",
@@ -303,14 +329,35 @@ def _third_year_IRIIA_apps() -> list[Resource]:
         ),
         resource(
             "Cisco Packet Tracer",
-            "https://www.netacad.com/resources/lab-downloads",
-            "Official free network simulation software from Cisco Networking Academy.",
+            "https://getintopc.com/softwares/network/cisco-packet-tracer-2024-free-download/",
+            "Cisco Packet Tracer network simulation software installer from Get Into PC.",
         ),
         resource(
             "Huawei eNSP (Network Simulator)",
             "https://github.com/horserosemilkshake/huawei-ensp",
             "Free Enterprise Network Simulation Platform for Huawei networking and routing labs.",
         ),
+    ]
+
+
+def _first_year_software_tools() -> list[Resource]:
+    return [
+        resource(
+            "Code::Blocks",
+            "https://www.codeblocks.org/downloads/binaries/",
+            "Free open-source C/C++ IDE official binaries for 1st Year programming.",
+        ),
+        resource(
+            "SolidWorks",
+            "https://getintopc.com/softwares/3d-cad/solidworks-premium-2020-free-download/",
+            "SolidWorks 3D CAD modeling software installer from Get Into PC.",
+        ),
+        resource(
+            "VS Code",
+            "https://code.visualstudio.com/download",
+            "Official download page. Code editor for all programming modules.",
+        ),
+        _matlab_resource(),
     ]
 
 
@@ -323,19 +370,14 @@ def _software_tools() -> list[Resource]:
         ),
         _matlab_resource(),
         resource(
-            "Intel Quartus Prime",
-            "https://www.intel.com/content/www/us/en/software/programmable/quartus-prime/overview.html",
-            "Official FPGA design software page.",
-        ),
-        resource(
             "PVsyst",
             "https://getintopc.com/softwares/simulation/pvsyst-2024-free-download/",
-            "Official photovoltaic system design software page.",
+            "Photovoltaic system design software installer from Get Into PC.",
         ),
         resource(
             "QGIS",
-            "https://qgis.org/download/",
-            "Official download page for the open-source GIS application.",
+            "https://getintopc.com/softwares/development/qgis-free-download/",
+            "GIS spatial data application installer from Get Into PC.",
         ),
     ]
 
@@ -353,20 +395,12 @@ def _software_tools_for_specialty(specialty: str, year: int) -> list[Resource]:
             "Official code editor for development.",
         ),
     ]
-    if specialty == "ENER":
+    if specialty in ("ENER", "ENER_GH", "GH"):
         tools.append(
             resource(
                 "PVsyst",
                 "https://getintopc.com/softwares/simulation/pvsyst-2024-free-download/",
-                "Photovoltaic system design software.",
-            )
-        )
-    elif specialty in ("uE", "GE"):
-        tools.append(
-            resource(
-                "Intel Quartus Prime",
-                "https://www.intel.com/content/www/us/en/software/programmable/quartus-prime/overview.html",
-                "Official FPGA design software page.",
+                "Photovoltaic system design software installer from Get Into PC.",
             )
         )
     return tools
@@ -430,7 +464,10 @@ ACADEMIC_DATA: Final[dict[str, dict[str, object]]] = {
         "label": "MI — Mathematics & Informatics",
         "active_years": [1],
         "years": {
-            1: {"label": "Year 1", "categories": _categories()},
+            1: {
+                "label": "Year 1",
+                "categories": _categories(software_tools=_first_year_software_tools()),
+            },
         },
     },
     "ST": {
@@ -439,7 +476,10 @@ ACADEMIC_DATA: Final[dict[str, dict[str, object]]] = {
         "years": {
             1: {
                 "label": "Year 1",
-                "categories": _categories(internal_drives=_first_year_st_drives()),
+                "categories": _categories(
+                    internal_drives=_first_year_st_drives(),
+                    software_tools=_first_year_software_tools(),
+                ),
             },
             2: {
                 "label": "Year 2 — Prepa",
@@ -450,21 +490,23 @@ ACADEMIC_DATA: Final[dict[str, dict[str, object]]] = {
             },
             3: {
                 "label": "Year 3 — Engineering Cycle",
-                "specialties": {
-                    key: {
-                        "label": label,
-                        "categories": _specialty_categories(
-                            key,
-                            year=3,
-                            internal_drives={
-                                "ENER": _third_year_enr_drives(),
-                                "IRIIA": _third_year_IRIIA_drives(),
-                                "GE": _third_year_GE_drives(),
-                            }.get(key),
-                        ),
+                "specialties": Year3Specialties(
+                    {
+                        key: {
+                            "label": label,
+                            "categories": _specialty_categories(
+                                key,
+                                year=3,
+                                internal_drives={
+                                    "ENER_GH": _third_year_enr_drives(),
+                                    "IRIIA": _third_year_IRIIA_drives(),
+                                    "GE": _third_year_GE_drives(),
+                                }.get(key),
+                            ),
+                        }
+                        for key, label in YEAR_3_SPECIALTY_LABELS.items()
                     }
-                    for key, label in SPECIALTY_LABELS.items()
-                },
+                ),
             },
             4: {
                 "label": "Year 4 — Engineering Cycle",

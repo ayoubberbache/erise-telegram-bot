@@ -9,6 +9,7 @@ from pathlib import Path
 try:
     from bot import (
         _category_keyboard,
+        _years_keyboard,
         get_empty_button_mode,
         set_empty_button_mode,
     )
@@ -16,7 +17,12 @@ try:
 except ImportError:
     HAS_BOT_DEPENDENCIES = False
 
-from resources_data import ACADEMIC_DATA, CATEGORY_LABELS, SPECIALTY_LABELS
+from resources_data import (
+    ACADEMIC_DATA,
+    CATEGORY_LABELS,
+    SPECIALTY_LABELS,
+    YEAR_3_SPECIALTY_LABELS,
+)
 
 
 class ResourceDataTests(unittest.TestCase):
@@ -28,7 +34,11 @@ class ResourceDataTests(unittest.TestCase):
         self.assertEqual(ACADEMIC_DATA["ST"]["active_years"], [1, 2, 3, 4, 5])
         for year in (1, 2):
             self.assertIn("categories", ACADEMIC_DATA["ST"]["years"][year])
-        for year in (3, 4, 5):
+        self.assertEqual(
+            set(ACADEMIC_DATA["ST"]["years"][3]["specialties"]),
+            set(YEAR_3_SPECIALTY_LABELS),
+        )
+        for year in (4, 5):
             self.assertEqual(
                 set(ACADEMIC_DATA["ST"]["years"][year]["specialties"]),
                 set(SPECIALTY_LABELS),
@@ -54,12 +64,15 @@ class ResourceDataTests(unittest.TestCase):
         self.assertIn("Drive Promo 2023/2024 ver 2", titles)
         self.assertIn("Drive Promo 2022/2023", titles)
 
-    def test_third_year_enr_uses_the_supplied_resources(self) -> None:
-        specialty = ACADEMIC_DATA["ST"]["years"][3]["specialties"]["ENER"]
-        self.assertEqual(specialty["label"], "ENER — Renewable Energies (ENR)")
+    def test_third_year_ener_gh_uses_the_supplied_resources(self) -> None:
+        specialty = ACADEMIC_DATA["ST"]["years"][3]["specialties"]["ENER_GH"]
+        self.assertEqual(specialty["label"], "ENER & GH — Renewable Energies & Green Hydrogen")
         drives = specialty["categories"]["drives"]
         self.assertEqual(len(drives), 3)
         self.assertTrue(all(item["url"] for item in drives))
+        # ENER and GH aliases in year 3 resolve to ENER_GH
+        self.assertEqual(ACADEMIC_DATA["ST"]["years"][3]["specialties"]["ENER"], specialty)
+        self.assertEqual(ACADEMIC_DATA["ST"]["years"][3]["specialties"]["GH"], specialty)
 
     def test_first_year_st_uses_the_supplied_resources(self) -> None:
         drives = ACADEMIC_DATA["ST"]["years"][1]["categories"]["drives"]
@@ -114,7 +127,7 @@ class ResourceDataTests(unittest.TestCase):
 
     def test_overleaf_in_every_engineering_specialty_years_3_4_5(self) -> None:
         for year in (3, 4, 5):
-            for specialty_key in SPECIALTY_LABELS:
+            for specialty_key in ACADEMIC_DATA["ST"]["years"][year]["specialties"]:
                 apps = ACADEMIC_DATA["ST"]["years"][year]["specialties"][specialty_key]["categories"]["apps"]
                 titles = [item["title"] for item in apps]
                 self.assertIn("Overleaf (LaTeX)", titles)
@@ -134,6 +147,39 @@ class ResourceDataTests(unittest.TestCase):
         # Year 3 IRIIA does not have external drives assigned
         iriia_external = ACADEMIC_DATA["ST"]["years"][3]["specialties"]["IRIIA"]["categories"]["external"]
         self.assertEqual(len(iriia_external), 0)
+
+    def test_intel_quartus_prime_removed_everywhere(self) -> None:
+        for branch_name, branch_data in ACADEMIC_DATA.items():
+            for year, year_data in branch_data["years"].items():
+                if "categories" in year_data:
+                    apps = year_data["categories"].get("apps", [])
+                    titles = [item["title"] for item in apps]
+                    self.assertNotIn("Intel Quartus Prime", titles)
+                elif "specialties" in year_data:
+                    for spec_name, spec_data in year_data["specialties"].items():
+                        apps = spec_data["categories"].get("apps", [])
+                        titles = [item["title"] for item in apps]
+                        self.assertNotIn("Intel Quartus Prime", titles)
+
+    def test_first_year_software_tools_include_codeblocks_and_solidworks(self) -> None:
+        for branch in ("ST", "MI"):
+            apps = ACADEMIC_DATA[branch]["years"][1]["categories"]["apps"]
+            titles = [item["title"] for item in apps]
+            self.assertIn("Code::Blocks", titles)
+            self.assertIn("SolidWorks", titles)
+            solidworks = next(item for item in apps if item["title"] == "SolidWorks")
+            self.assertIn("getintopc.com", solidworks["url"])
+            codeblocks = next(item for item in apps if item["title"] == "Code::Blocks")
+            self.assertIn("codeblocks.org", codeblocks["url"])
+
+    def test_get_into_pc_links_applied(self) -> None:
+        iriia_apps = ACADEMIC_DATA["ST"]["years"][3]["specialties"]["IRIIA"]["categories"]["apps"]
+        by_title = {item["title"]: item["url"] for item in iriia_apps}
+        self.assertIn("getintopc.com", by_title["PyCharm"])
+        self.assertIn("getintopc.com", by_title["VirtualBox"])
+        self.assertIn("getintopc.com", by_title["Apache NetBeans"])
+        self.assertIn("getintopc.com", by_title["Cisco Packet Tracer"])
+        self.assertIn("getintopc.com", by_title["MATLAB"])
 
 
 class NavigationContractTests(unittest.TestCase):
@@ -177,6 +223,12 @@ class NavigationContractTests(unittest.TestCase):
             self.assertIn("▫️ YouTube Playlists (Empty)", buttons_grey)
         finally:
             set_empty_button_mode(orig)
+
+    @unittest.skipUnless(HAS_BOT_DEPENDENCIES, "Requires bot dependencies (python-telegram-bot, dotenv)")
+    def test_mi_branch_hides_inactive_years_in_keyboard(self) -> None:
+        kb = _years_keyboard("MI")
+        button_texts = [b.text for row in kb.inline_keyboard for b in row]
+        self.assertEqual(button_texts, ["Year 1", "Back"])
 
 
 if __name__ == "__main__":
