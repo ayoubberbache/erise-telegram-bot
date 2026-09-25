@@ -304,7 +304,7 @@ def main() -> None:
         except Exception as err:
             LOGGER.warning("Could not start keep_alive server: %s", err)
     LOGGER.info("Starting academic resource bot")
-    create_application().run_polling(allowed_updates=Update.ALL_TYPES)
+    create_application().run_polling(allowed_updates=Update.ALL_TYPES, drop_pending_updates=True)
 
 
 if __name__ == "__main__":
