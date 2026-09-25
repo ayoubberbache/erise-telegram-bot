@@ -8,7 +8,10 @@ from pathlib import Path
 
 try:
     from bot import (
+        _branch_keyboard,
         _category_keyboard,
+        _fast_panel_keyboard,
+        _guide_text,
         _years_keyboard,
         get_empty_button_mode,
         set_empty_button_mode,
@@ -272,6 +275,30 @@ class NavigationContractTests(unittest.TestCase):
         kb = _years_keyboard("MI")
         button_texts = [b.text for row in kb.inline_keyboard for b in row]
         self.assertEqual(button_texts, ["Year 1", "Back"])
+
+    @unittest.skipUnless(HAS_BOT_DEPENDENCIES, "Requires bot dependencies (python-telegram-bot, dotenv)")
+    def test_fast_panel_and_guide_keyboard_and_text(self) -> None:
+        guide = _guide_text()
+        self.assertIn("ERISE", guide)
+        self.assertIn("MI", guide)
+        self.assertIn("ST", guide)
+        self.assertIn("ENER & GH", guide)
+        self.assertIn("Internal Drives", guide)
+        self.assertIn("Software & Tools", guide)
+
+        panel = _fast_panel_keyboard()
+        button_texts = [b.text for row in panel.inline_keyboard for b in row]
+        self.assertIn("⚡ 1st Year ST", button_texts)
+        self.assertIn("⚡ 1st Year MI", button_texts)
+        self.assertIn("⚡ 2nd Year Prepa", button_texts)
+        self.assertIn("⚡ 3rd Year ENER & GH", button_texts)
+        self.assertIn("⚡ 3rd Year IRIIA", button_texts)
+        self.assertIn("⚡ 3rd Year GE", button_texts)
+        self.assertIn("🚀 Main Menu (All Branches)", button_texts)
+
+        branch_kb = _branch_keyboard()
+        branch_texts = [b.text for row in branch_kb.inline_keyboard for b in row]
+        self.assertIn("⚡ Fast Panel & Guide", branch_texts)
 
 
 if __name__ == "__main__":

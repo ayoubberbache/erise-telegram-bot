@@ -58,10 +58,58 @@ def _rows(buttons: list[InlineKeyboardButton], columns: int = 1) -> list[list[In
 
 def _branch_keyboard() -> InlineKeyboardMarkup:
     buttons = [
-        _button("MI · Mathematics & Informatics", _callback("d", "MI")),
-        _button("ST · Science & Technology", _callback("d", "ST")),
+        [_button("MI · Mathematics & Informatics", _callback("d", "MI"))],
+        [_button("ST · Science & Technology", _callback("d", "ST"))],
+        [_button("⚡ Fast Panel & Guide", _callback("g", "panel"))],
     ]
-    return InlineKeyboardMarkup(_rows(buttons))
+    return InlineKeyboardMarkup(buttons)
+
+
+def _guide_text() -> str:
+    return (
+        "📚 ERISE Academic Resource Hub — User Guide\n\n"
+        "Welcome to the official academic platform by ERISE Club "
+        "(HNS RE2SD Batna).\n\n"
+        "🧭 How The Bot Works:\n\n"
+        "1. Departments:\n"
+        "• MI (Mathematics & Informatics): Newly opened; Year 1 active.\n"
+        "• ST (Science & Technology): Active for Years 1 through 5.\n\n"
+        "2. Academic Levels:\n"
+        "• Prepa (Years 1 & 2): Core foundational modules.\n"
+        "• Cycle Ingénieur (Years 3 to 5):\n"
+        "  - ENER & GH: Renewable Energies and Green Hydrogen study together in 3rd year with shared drives, groups, and simulation tools.\n"
+        "  - IRIIA: Intelligent Systems & Automation.\n"
+        "  - GE: Electrical Engineering.\n"
+        "  - µE: Microelectronics.\n\n"
+        "3. Four Resource Categories:\n"
+        "• 📁 Internal Drives: Google Drive archives & promo Telegram groups.\n"
+        "• 🌐 External Drives: National concours, USTHB, ESI, Polytech (Year 2 Prepa).\n"
+        "• 🛠 Software & Tools: Download links (Get Into PC / Official) for engineering software (MATLAB, SolidWorks, PVsyst, Modelica, ANSYS, COMSOL, HOMER Pro, etc.).\n"
+        "• 📺 YouTube Playlists: Curated lectures and review videos.\n\n"
+        "⚡ Fast Panel Shortcuts:\n"
+        "Tap any button below to jump straight to your level!"
+    )
+
+
+def _fast_panel_keyboard() -> InlineKeyboardMarkup:
+    buttons = [
+        [
+            _button("⚡ 1st Year ST", _callback("y", "ST", "1")),
+            _button("⚡ 1st Year MI", _callback("y", "MI", "1")),
+        ],
+        [
+            _button("⚡ 2nd Year Prepa", _callback("y", "ST", "2")),
+            _button("⚡ 3rd Year ENER & GH", _callback("s", "ST", "3", "ENER_GH")),
+        ],
+        [
+            _button("⚡ 3rd Year IRIIA", _callback("s", "ST", "3", "IRIIA")),
+            _button("⚡ 3rd Year GE", _callback("s", "ST", "3", "GE")),
+        ],
+        [
+            _button("🚀 Main Menu (All Branches)", _callback("b", "root")),
+        ],
+    ]
+    return InlineKeyboardMarkup(buttons)
 
 
 def _years_keyboard(branch: str) -> InlineKeyboardMarkup:
@@ -293,20 +341,39 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
         )
         return
 
+    if action == "g":
+        await query.answer()
+        if parts[1] == "panel":
+            await _edit(query, _guide_text(), _fast_panel_keyboard())
+        return
+
     await query.answer()
     LOGGER.warning("Ignoring unknown callback action: %s", action)
+
+
+async def guide_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    del context
+    if update.message:
+        await update.message.reply_text(
+            _guide_text(),
+            reply_markup=_fast_panel_keyboard(),
+        )
 
 
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     del context
     if update.message:
         text = (
-            "💡 *ERISE Academic Resource Bot Guide*\n\n"
+            "💡 *ERISE Academic Resource Bot Commands & Navigation*\n\n"
+            "• /start — Open the main branch selection menu\n"
+            "• /guide — Open the system guide and Fast Panel shortcuts\n"
+            "• /help — Show this help message\n"
+            "• /about — About ERISE Scientific Club\n"
+            "• /toggle_empty — Toggle empty button appearance (disappear vs greyed out)\n\n"
             "1. Select your Department (MI or ST).\n"
             "2. Select your Year (1 to 5).\n"
             "3. If in Engineering cycle (Years 3–5), select your specialty.\n"
-            "4. Access official course drives, software tools, external resources, and YouTube playlists.\n\n"
-            "Type /start to return to the main menu at any time."
+            "4. Access course drives, software tools, external resources, and YouTube playlists."
         )
         await update.message.reply_text(text, parse_mode=ParseMode.MARKDOWN)
 
@@ -351,6 +418,7 @@ def create_application() -> Application:
 
     application = Application.builder().token(token).build()
     application.add_handler(CommandHandler("start", start))
+    application.add_handler(CommandHandler("guide", guide_command))
     application.add_handler(CommandHandler("help", help_command))
     application.add_handler(CommandHandler("about", about_command))
     application.add_handler(CommandHandler("toggle_empty", toggle_empty_command))
