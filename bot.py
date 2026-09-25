@@ -19,7 +19,12 @@ from telegram.ext import (
     ContextTypes,
 )
 
-from resources_data import ACADEMIC_DATA, CATEGORY_LABELS
+from resources_data import (
+    ACADEMIC_DATA,
+    CATEGORY_LABELS,
+    ERISE_CLUB_INFO,
+    get_about_text,
+)
 
 LOGGER = logging.getLogger(__name__)
 TOKEN_ENV = "TELEGRAM_BOT_TOKEN"
@@ -88,7 +93,8 @@ def _guide_text() -> str:
         "💡 *How to Use:*\n"
         "• Tap /start or use the menu button to open the branch selection menu.\n"
         "• Tap /guide anytime to read this guide.\n"
-        "• Tap /help to see all available commands."
+        "• Tap /help to see all available commands.\n"
+        "• Tap /about to learn about ERISE Scientific Club & visit our official portals."
     )
 
 
@@ -342,7 +348,7 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
             "• /start — Open the main branch selection menu\n"
             "• /guide — How to use the bot and academic structure guide\n"
             "• /help — Show this help message\n"
-            "• /about — About ERISE Scientific Club\n"
+            "• /about — About ERISE Scientific Club & official websites\n"
             "• /toggle_empty — Toggle empty button appearance (disappear vs greyed out)\n\n"
             "1. Select your Department (MI or ST).\n"
             "2. Select your Year (1 to 5).\n"
@@ -371,23 +377,29 @@ async def toggle_empty_command(update: Update, context: ContextTypes.DEFAULT_TYP
         await update.message.reply_text(text, parse_mode=ParseMode.MARKDOWN)
 
 
+def _about_keyboard() -> InlineKeyboardMarkup:
+    buttons = [
+        [InlineKeyboardButton("🌐 Official Website", url=ERISE_CLUB_INFO["website"])],
+        [InlineKeyboardButton("🔗 Club Linktree & Portals", url=ERISE_CLUB_INFO["linktree"])],
+    ]
+    return InlineKeyboardMarkup(buttons)
+
+
 async def about_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     del context
     if update.message:
-        text = (
-            "🌟 *ERISE Scientific Club*\n"
-            "National Higher School of Renewable Energies, Environment & Sustainable Development\n"
-            "(HNS RE2SD Batna)\n\n"
-            "Empowering future engineers through innovation, knowledge sharing, and technical resources."
+        await update.message.reply_text(
+            get_about_text(),
+            reply_markup=_about_keyboard(),
+            parse_mode=ParseMode.MARKDOWN,
         )
-        await update.message.reply_text(text, parse_mode=ParseMode.MARKDOWN)
 
 
 BOT_COMMANDS = [
     BotCommand("start", "Start the bot & open branch menu"),
     BotCommand("guide", "How to use the bot & navigation guide"),
     BotCommand("help", "Help and available commands"),
-    BotCommand("about", "About ERISE Scientific Club"),
+    BotCommand("about", "About ERISE Scientific Club & websites"),
     BotCommand("toggle_empty", "Toggle empty button appearance"),
 ]
 

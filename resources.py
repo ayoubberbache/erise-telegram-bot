@@ -44,6 +44,25 @@ YEAR_3_SPECIALTY_LABELS: Final[dict[str, str]] = {
     "GE": "GE — Electrical Engineering",
 }
 
+ERISE_CLUB_INFO: Final[dict[str, str]] = {
+    "name": "ERISE Scientific Club",
+    "school": "National Higher School of Renewable Energies, Environment & Sustainable Development (HNS RE2SD Batna)",
+    "description": "Empowering future engineers through innovation, knowledge sharing, and technical resources.",
+    "website": "https://erise-scientific-club.site/",
+    "linktree": "https://erise-club-linktree.web.app/",
+}
+
+
+def get_about_text() -> str:
+    info = ERISE_CLUB_INFO
+    return (
+        f"🌟 *{info['name']}*\n"
+        f"{info['school']}\n\n"
+        f"{info['description']}\n\n"
+        f"🌐 *Official Website:*\n{info['website']}\n\n"
+        f"🔗 *Club Linktree & Portals:*\n{info['linktree']}"
+    )
+
 
 class Year3Specialties(dict):
     """Specialties mapping for Year 3 ST where ENER and GH study together."""

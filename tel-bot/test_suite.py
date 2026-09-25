@@ -9,6 +9,7 @@ from pathlib import Path
 try:
     from bot import (
         BOT_COMMANDS,
+        _about_keyboard,
         _branch_keyboard,
         _category_keyboard,
         _guide_text,
@@ -23,8 +24,10 @@ except ImportError:
 from resources_data import (
     ACADEMIC_DATA,
     CATEGORY_LABELS,
+    ERISE_CLUB_INFO,
     SPECIALTY_LABELS,
     YEAR_3_SPECIALTY_LABELS,
+    get_about_text,
 )
 
 
@@ -357,6 +360,23 @@ class NavigationContractTests(unittest.TestCase):
         int_drives = ACADEMIC_DATA["ST"]["years"][2]["categories"]["drives"]
         int_titles = [item["title"] for item in int_drives]
         self.assertIn("Drive Global 2CPST (Programme Complet)", int_titles)
+
+    def test_erise_club_about_info(self) -> None:
+        self.assertEqual(ERISE_CLUB_INFO["website"], "https://erise-scientific-club.site/")
+        self.assertEqual(ERISE_CLUB_INFO["linktree"], "https://erise-club-linktree.web.app/")
+        about_text = get_about_text()
+        self.assertIn("ERISE Scientific Club", about_text)
+        self.assertIn("https://erise-scientific-club.site/", about_text)
+        self.assertIn("https://erise-club-linktree.web.app/", about_text)
+
+    @unittest.skipUnless(HAS_BOT_DEPENDENCIES, "Requires bot dependencies (python-telegram-bot, dotenv)")
+    def test_about_keyboard(self) -> None:
+        kb = _about_keyboard()
+        buttons = [b for row in kb.inline_keyboard for b in row]
+        self.assertEqual(len(buttons), 2)
+        urls = [b.url for b in buttons]
+        self.assertIn("https://erise-scientific-club.site/", urls)
+        self.assertIn("https://erise-club-linktree.web.app/", urls)
 
 
 if __name__ == "__main__":
