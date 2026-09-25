@@ -48,6 +48,18 @@ class ResourceDataTests(unittest.TestCase):
         self.assertEqual(len(drives), 3)
         self.assertTrue(all(item["url"] for item in drives))
 
+    def test_first_year_st_uses_the_supplied_resources(self) -> None:
+        drives = ACADEMIC_DATA["ST"]["years"][1]["categories"]["drives"]
+        self.assertEqual(len(drives), 2)
+        self.assertTrue(all(item["url"] for item in drives))
+
+    def test_third_year_iriia_uses_the_supplied_resources(self) -> None:
+        specialty = ACADEMIC_DATA["ST"]["years"][3]["specialties"]["IRIIA"]
+        self.assertEqual(specialty["label"], "IRIIA — Intelligent Systems")
+        drives = specialty["categories"]["drives"]
+        self.assertEqual(len(drives), 2)
+        self.assertTrue(all(item["url"] for item in drives))
+
 
 class NavigationContractTests(unittest.TestCase):
     def test_bot_does_not_contain_hardcoded_http_links(self) -> None:

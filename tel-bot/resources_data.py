@@ -118,6 +118,36 @@ def _third_year_enr_drives() -> list[Resource]:
     ]
 
 
+def _third_year_IRIIA_drives() -> list[Resource]:
+    return [
+        resource(
+            "2025/2024 — 3rd year IRIIA",
+            "https://drive.google.com/drive/folders/1gK46myB5nJSGeUuYXUszM5eU25JudwgI?usp=drive_link",
+            "Internal Drive for 3rd Year IRIIA, 2025/2024.",
+        ),
+        resource(
+            "2026/2025 — 3rd year IRIIA",
+            "https://drive.google.com/drive/folders/1b2hM-zY42b64FBk1ubHxU8kbN_QO2O9A?usp=sharing",
+            "Internal Drive for 3rd Year IRIIA, 2026/2025.",
+        ),
+    ]
+
+
+def _first_year_ST_drives() -> list[Resource]:
+    return [
+        resource(
+            "2027/2026 — 1st year ST",
+            "https://t.me/+9nAvFiCXiR9lMTg0",
+            "Telegram Group for 1st year students, 2027/2026.",
+        ),
+        resource(
+            "2026/2025 — 1st year ST",
+            "https://t.me/doesntworkanyway",
+            "Telegram Group for 1st year students, 2026/2025.",
+        ),
+    ]
+
+
 def _external_drives() -> list[Resource]:
     return [
         resource("Polytech resources", "", "Add the Polytech resource folder."),
@@ -140,7 +170,7 @@ def _software_tools() -> list[Resource]:
         ),
         resource(
             "MATLAB",
-            "https://www.mathworks.com/products/matlab.html",
+            "https://getintopc.com/softwares/development/matlab-r2018b-free-download-6021288/",
             "Official MATLAB product page and download entry point.",
         ),
         resource(
@@ -150,7 +180,7 @@ def _software_tools() -> list[Resource]:
         ),
         resource(
             "PVsyst",
-            "https://www.pvsyst.com/",
+            "https://getintopc.com/softwares/simulation/pvsyst-2024-free-download/",
             "Official photovoltaic system design software page.",
         ),
         resource(
@@ -215,7 +245,7 @@ ACADEMIC_DATA: Final[dict[str, dict[str, object]]] = {
         "label": "ST — Science & Technology",
         "active_years": [1, 2, 3, 4, 5],
         "years": {
-            1: {"label": "Year 1", "categories": _categories()},
+            1: {"label": "Year 1", "categories": _categories(_first_year_ST_drives())},
             2: {
                 "label": "Year 2 — Prepa",
                 "categories": _categories(_second_year_prepa_drives()),
@@ -227,7 +257,10 @@ ACADEMIC_DATA: Final[dict[str, dict[str, object]]] = {
                         "label": label,
                         "categories": _specialty_categories(
                             key,
-                            _third_year_enr_drives() if key == "ENER" else None,
+                            {
+                                "ENER": _third_year_enr_drives(),
+                                "IRIIA": _third_year_IRIIA_drives(),
+                            }.get(key),
                         ),
                     }
                     for key, label in SPECIALTY_LABELS.items()
