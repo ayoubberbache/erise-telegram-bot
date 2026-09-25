@@ -77,7 +77,7 @@ class ResourceDataTests(unittest.TestCase):
         self.assertEqual(ACADEMIC_DATA["ST"]["years"][3]["specialties"]["ENER"], specialty)
         self.assertEqual(ACADEMIC_DATA["ST"]["years"][3]["specialties"]["GH"], specialty)
 
-        # Software tools for 3rd year ENER & GH include hydrogen & energy apps
+        # Software tools for 3rd year ENER & GH
         apps = specialty["categories"]["apps"]
         titles = [item["title"] for item in apps]
         for expected in (
@@ -86,15 +86,19 @@ class ResourceDataTests(unittest.TestCase):
             "Meteonorm",
             "Global Wind Atlas",
             "RETScreen Expert",
-            "Modelica (OpenModelica)",
-            "ANSYS Products",
-            "HOMER Pro",
-            "COMSOL Multiphysics",
             "Overleaf (LaTeX)",
             "MATLAB",
             "VS Code",
         ):
             self.assertIn(expected, titles)
+        # Advanced hydrogen apps are assigned to 5th year GH
+        for moved in (
+            "Modelica (OpenModelica)",
+            "ANSYS Products",
+            "HOMER Pro",
+            "COMSOL Multiphysics",
+        ):
+            self.assertNotIn(moved, titles)
         self.assertTrue(all(item["url"] for item in apps))
 
         # Check Get Into PC links for apps available there, and official site for Wind Atlas
@@ -103,6 +107,24 @@ class ResourceDataTests(unittest.TestCase):
         self.assertIn("getintopc.com", by_title["Meteonorm"])
         self.assertIn("getintopc.com", by_title["RETScreen Expert"])
         self.assertIn("globalwindatlas.info", by_title["Global Wind Atlas"])
+
+    def test_fifth_year_gh_apps_contain_advanced_hydrogen_tools(self) -> None:
+        y5_gh_apps = ACADEMIC_DATA["ST"]["years"][5]["specialties"]["GH"]["categories"]["apps"]
+        titles = [item["title"] for item in y5_gh_apps]
+        expected = [
+            "Modelica (OpenModelica)",
+            "ANSYS Products",
+            "HOMER Pro",
+            "COMSOL Multiphysics",
+            "SolidWorks",
+            "RETScreen Expert",
+            "Overleaf (LaTeX)",
+            "MATLAB",
+            "VS Code",
+        ]
+        for name in expected:
+            self.assertIn(name, titles)
+        self.assertTrue(all(item["url"] for item in y5_gh_apps))
 
     def test_first_year_st_uses_the_supplied_resources(self) -> None:
         drives = ACADEMIC_DATA["ST"]["years"][1]["categories"]["drives"]

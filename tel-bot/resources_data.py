@@ -425,6 +425,28 @@ def _third_year_ener_gh_apps() -> list[Resource]:
             "https://getintopc.com/softwares/simulation/retscreen-expert-free-download/",
             "Clean energy management and renewable project feasibility software from Get Into PC.",
         ),
+    ]
+
+
+def _fifth_year_gh_apps() -> list[Resource]:
+    return [
+        _overleaf_resource(),
+        _matlab_resource(),
+        resource(
+            "VS Code",
+            "https://code.visualstudio.com/download",
+            "Official code editor for development.",
+        ),
+        resource(
+            "SolidWorks",
+            "https://getintopc.com/softwares/3d-cad/solidworks-premium-2020-free-download/",
+            "SolidWorks 3D CAD modeling software installer from Get Into PC.",
+        ),
+        resource(
+            "RETScreen Expert",
+            "https://getintopc.com/softwares/simulation/retscreen-expert-free-download/",
+            "Clean energy management and renewable project feasibility software from Get Into PC.",
+        ),
         resource(
             "Modelica (OpenModelica)",
             "https://openmodelica.org/download/download-windows/",
@@ -453,6 +475,8 @@ def _software_tools_for_specialty(specialty: str, year: int) -> list[Resource]:
         return _third_year_IRIIA_apps()
     if (specialty in ("ENER", "ENER_GH", "GH") and year == 3) or specialty == "ENER_GH":
         return _third_year_ener_gh_apps()
+    if specialty == "GH" and year == 5:
+        return _fifth_year_gh_apps()
 
     tools = [
         _overleaf_resource(),
@@ -502,26 +526,6 @@ def _software_tools_for_specialty(specialty: str, year: int) -> list[Resource]:
                 "RETScreen Expert",
                 "https://getintopc.com/softwares/simulation/retscreen-expert-free-download/",
                 "Clean energy management and renewable project feasibility software from Get Into PC.",
-            ),
-            resource(
-                "Modelica (OpenModelica)",
-                "https://openmodelica.org/download/download-windows/",
-                "Free open-source Modelica modeling and simulation environment for energy systems.",
-            ),
-            resource(
-                "ANSYS Products",
-                "https://getintopc.com/softwares/simulation/ansys-products-2024-free-download/",
-                "Engineering simulation suite (CFD, FEA, thermal) installer from Get Into PC.",
-            ),
-            resource(
-                "HOMER Pro",
-                "https://getintopc.com/softwares/electrical-engineering/homer-pro-free-download/",
-                "Microgrid and hybrid renewable/hydrogen systems optimization installer from Get Into PC.",
-            ),
-            resource(
-                "COMSOL Multiphysics",
-                "https://getintopc.com/softwares/simulation/comsol-multiphysics-2024-free-download/",
-                "Multiphysics simulation software for fuel cells and electrolysis from Get Into PC.",
             ),
         ])
     return tools
