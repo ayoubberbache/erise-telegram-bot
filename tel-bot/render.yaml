@@ -1,29 +1,27 @@
+# =====================================================================
+# Render Infrastructure Blueprint (render.yaml)
+# ERISE Scientific Club - HNS RE2SD Telegram Bot
+# =====================================================================
+# Allows 1-click Free Tier deployment on Render as a Web Service.
+
 services:
   - type: web
-    name: tel-bot-health
+    name: erise-telegram-bot
     runtime: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: python keep_alive.py
+    region: frankfurt
+    plan: free
+    buildCommand: "pip install --upgrade pip && pip install -r requirements.txt"
+    startCommand: "python bot.py"
     healthCheckPath: /health
-
-  - type: worker
-    name: tel-bot
-    runtime: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: python bot.py
+    autoDeploy: true
     envVars:
       - key: TELEGRAM_BOT_TOKEN
         sync: false
-      - key: LOG_LEVEL
-        value: INFO
-
-  - type: worker
-    name: tel-bot-sentinel
-    runtime: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: python keep_alive_bot.py
-    envVars:
-      - key: KEEP_ALIVE_URL
+      - key: BOT_TOKEN
         sync: false
+      - key: PORT
+        value: 10000
       - key: LOG_LEVEL
         value: INFO
+      - key: PYTHON_VERSION
+        value: 3.12.0

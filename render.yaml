@@ -1,27 +1,27 @@
 # =====================================================================
 # Render Infrastructure Blueprint (render.yaml)
-# HNS-RE2SD Resources Telegram Bot (ERISE Scientific Club)
+# ERISE Scientific Club - HNS RE2SD Telegram Bot
 # =====================================================================
-# This file allows 1-click declarative deployment on Render.com as a Web Service.
+# Allows 1-click Free Tier deployment on Render as a Web Service.
 
 services:
   - type: web
-    name: hns-re2sd-telegram-bot
+    name: erise-telegram-bot
     runtime: python
-    region: frankfurt  # Nearest server region to Algeria / Europe
+    region: frankfurt  # Closest to Algeria & Europe
     plan: free
     buildCommand: "pip install --upgrade pip && pip install -r requirements.txt"
     startCommand: "python bot.py"
     healthCheckPath: /health
     autoDeploy: true
     envVars:
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
       - key: BOT_TOKEN
-        sync: false  # You will be prompted to paste your real Telegram token in the Render dashboard
+        sync: false
       - key: PORT
         value: 10000
-      - key: APP_URL
-        sync: false  # Your Render URL, e.g., https://hns-re2sd-telegram-bot.onrender.com
-      - key: PING_INTERVAL_MINUTES
-        value: 10
+      - key: LOG_LEVEL
+        value: INFO
       - key: PYTHON_VERSION
         value: 3.12.0
