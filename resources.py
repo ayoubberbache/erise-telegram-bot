@@ -382,9 +382,48 @@ def _software_tools() -> list[Resource]:
     ]
 
 
+def _third_year_ener_gh_apps() -> list[Resource]:
+    return [
+        _overleaf_resource(),
+        _matlab_resource(),
+        resource(
+            "VS Code",
+            "https://code.visualstudio.com/download",
+            "Official code editor for development.",
+        ),
+        resource(
+            "PVsyst",
+            "https://getintopc.com/softwares/simulation/pvsyst-2024-free-download/",
+            "Photovoltaic system design software installer from Get Into PC.",
+        ),
+        resource(
+            "Modelica (OpenModelica)",
+            "https://openmodelica.org/download/download-windows/",
+            "Free open-source Modelica modeling and simulation environment for energy systems.",
+        ),
+        resource(
+            "ANSYS Products",
+            "https://getintopc.com/softwares/simulation/ansys-products-2024-free-download/",
+            "Engineering simulation suite (CFD, FEA, thermal) installer from Get Into PC.",
+        ),
+        resource(
+            "HOMER Pro",
+            "https://getintopc.com/softwares/electrical-engineering/homer-pro-free-download/",
+            "Microgrid and hybrid renewable/hydrogen systems optimization installer from Get Into PC.",
+        ),
+        resource(
+            "COMSOL Multiphysics",
+            "https://getintopc.com/softwares/simulation/comsol-multiphysics-2024-free-download/",
+            "Multiphysics simulation software for fuel cells and electrolysis from Get Into PC.",
+        ),
+    ]
+
+
 def _software_tools_for_specialty(specialty: str, year: int) -> list[Resource]:
     if specialty == "IRIIA" and year == 3:
         return _third_year_IRIIA_apps()
+    if (specialty in ("ENER", "ENER_GH", "GH") and year == 3) or specialty == "ENER_GH":
+        return _third_year_ener_gh_apps()
 
     tools = [
         _overleaf_resource(),
@@ -395,14 +434,42 @@ def _software_tools_for_specialty(specialty: str, year: int) -> list[Resource]:
             "Official code editor for development.",
         ),
     ]
-    if specialty in ("ENER", "ENER_GH", "GH"):
-        tools.append(
+    if specialty == "ENER":
+        tools.extend([
             resource(
                 "PVsyst",
                 "https://getintopc.com/softwares/simulation/pvsyst-2024-free-download/",
                 "Photovoltaic system design software installer from Get Into PC.",
-            )
-        )
+            ),
+            resource(
+                "HOMER Pro",
+                "https://getintopc.com/softwares/electrical-engineering/homer-pro-free-download/",
+                "Microgrid and hybrid renewable systems optimization installer from Get Into PC.",
+            ),
+        ])
+    elif specialty == "GH":
+        tools.extend([
+            resource(
+                "Modelica (OpenModelica)",
+                "https://openmodelica.org/download/download-windows/",
+                "Free open-source Modelica modeling and simulation environment for energy systems.",
+            ),
+            resource(
+                "ANSYS Products",
+                "https://getintopc.com/softwares/simulation/ansys-products-2024-free-download/",
+                "Engineering simulation suite (CFD, FEA, thermal) installer from Get Into PC.",
+            ),
+            resource(
+                "HOMER Pro",
+                "https://getintopc.com/softwares/electrical-engineering/homer-pro-free-download/",
+                "Microgrid and hybrid renewable/hydrogen systems optimization installer from Get Into PC.",
+            ),
+            resource(
+                "COMSOL Multiphysics",
+                "https://getintopc.com/softwares/simulation/comsol-multiphysics-2024-free-download/",
+                "Multiphysics simulation software for fuel cells and electrolysis from Get Into PC.",
+            ),
+        ])
     return tools
 
 

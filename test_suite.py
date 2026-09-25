@@ -74,6 +74,22 @@ class ResourceDataTests(unittest.TestCase):
         self.assertEqual(ACADEMIC_DATA["ST"]["years"][3]["specialties"]["ENER"], specialty)
         self.assertEqual(ACADEMIC_DATA["ST"]["years"][3]["specialties"]["GH"], specialty)
 
+        # Software tools for 3rd year ENER & GH include hydrogen apps
+        apps = specialty["categories"]["apps"]
+        titles = [item["title"] for item in apps]
+        for expected in (
+            "PVsyst",
+            "Modelica (OpenModelica)",
+            "ANSYS Products",
+            "HOMER Pro",
+            "COMSOL Multiphysics",
+            "Overleaf (LaTeX)",
+            "MATLAB",
+            "VS Code",
+        ):
+            self.assertIn(expected, titles)
+        self.assertTrue(all(item["url"] for item in apps))
+
     def test_first_year_st_uses_the_supplied_resources(self) -> None:
         drives = ACADEMIC_DATA["ST"]["years"][1]["categories"]["drives"]
         self.assertEqual(len(drives), 3)
