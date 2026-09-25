@@ -103,6 +103,10 @@ class ResourceDataTests(unittest.TestCase):
             "VUE (Mind Mapping)",
             "Overleaf (LaTeX)",
             "MATLAB",
+            "Oracle Database Free",
+            "Oracle SQL Developer",
+            "Cisco Packet Tracer",
+            "Huawei eNSP (Network Simulator)",
         ]
         for name in expected:
             self.assertIn(name, titles)

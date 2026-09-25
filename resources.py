@@ -291,6 +291,26 @@ def _third_year_IRIIA_apps() -> list[Resource]:
         ),
         _overleaf_resource(),
         _matlab_resource(),
+        resource(
+            "Oracle Database Free",
+            "https://www.oracle.com/database/free/",
+            "Official free full-featured Oracle Database (23c/XE) for developers and students.",
+        ),
+        resource(
+            "Oracle SQL Developer",
+            "https://www.oracle.com/database/sqldeveloper/",
+            "Free official graphical interface tool for Oracle database development and queries.",
+        ),
+        resource(
+            "Cisco Packet Tracer",
+            "https://www.netacad.com/resources/lab-downloads",
+            "Official free network simulation software from Cisco Networking Academy.",
+        ),
+        resource(
+            "Huawei eNSP (Network Simulator)",
+            "https://github.com/horserosemilkshake/huawei-ensp",
+            "Free Enterprise Network Simulation Platform for Huawei networking and routing labs.",
+        ),
     ]
 
 
