@@ -8,9 +8,9 @@ from pathlib import Path
 
 try:
     from bot import (
+        BOT_COMMANDS,
         _branch_keyboard,
         _category_keyboard,
-        _fast_panel_keyboard,
         _guide_text,
         _years_keyboard,
         get_empty_button_mode,
@@ -299,7 +299,7 @@ class NavigationContractTests(unittest.TestCase):
         self.assertEqual(button_texts, ["Year 1", "Back"])
 
     @unittest.skipUnless(HAS_BOT_DEPENDENCIES, "Requires bot dependencies (python-telegram-bot, dotenv)")
-    def test_fast_panel_and_guide_keyboard_and_text(self) -> None:
+    def test_guide_command_text_and_bot_commands(self) -> None:
         guide = _guide_text()
         self.assertIn("ERISE", guide)
         self.assertIn("MI", guide)
@@ -308,19 +308,48 @@ class NavigationContractTests(unittest.TestCase):
         self.assertIn("Internal Drives", guide)
         self.assertIn("Software & Tools", guide)
 
-        panel = _fast_panel_keyboard()
-        button_texts = [b.text for row in panel.inline_keyboard for b in row]
-        self.assertIn("⚡ 1st Year ST", button_texts)
-        self.assertIn("⚡ 1st Year MI", button_texts)
-        self.assertIn("⚡ 2nd Year Prepa", button_texts)
-        self.assertIn("⚡ 3rd Year ENER & GH", button_texts)
-        self.assertIn("⚡ 3rd Year IRIIA", button_texts)
-        self.assertIn("⚡ 3rd Year GE", button_texts)
-        self.assertIn("🚀 Main Menu (All Branches)", button_texts)
-
+        # Branch keyboard only contains branch navigation buttons, not guide button
         branch_kb = _branch_keyboard()
         branch_texts = [b.text for row in branch_kb.inline_keyboard for b in row]
-        self.assertIn("⚡ Fast Panel & Guide", branch_texts)
+        self.assertEqual(
+            branch_texts,
+            ["MI · Mathematics & Informatics", "ST · Science & Technology"],
+        )
+
+        # Bot commands registered for Telegram native menu
+        cmd_names = [cmd.command for cmd in BOT_COMMANDS]
+        self.assertIn("start", cmd_names)
+        self.assertIn("guide", cmd_names)
+        self.assertIn("help", cmd_names)
+
+    def test_second_year_prepa_external_drives(self) -> None:
+        ext_drives = ACADEMIC_DATA["ST"]["years"][2]["categories"]["external"]
+        self.assertGreaterEqual(len(ext_drives), 19)
+        titles = [item["title"] for item in ext_drives]
+        for expected in (
+            "National Contest Preparation (Concours ST)",
+            "External Resources — 2nd Prepa",
+            "Concours",
+            "Easy CPST",
+            "Polytechnique Oran (ENPO)",
+            "Stud-dying for 2CP (ENPA)",
+            "Sujets ENP",
+            "ANALYSE CNCR",
+            "PHYSIQUE CNCR",
+            "CHIMIE CNCR",
+            "ANANUM CNCR",
+            "SJTS ENPC",
+            "TD ESSAT",
+            "2CPST 2020/2021 (ENP Oran & Multi)",
+            "Deuxième année (ENPC)",
+            "VOM",
+            "Sjts classe préparatoire (ENPC)",
+            "SABRI STARTER PACK",
+            "Sujets / Concours (Highly Recommended)",
+            "ESSA Alger (Highly Recommended)",
+        ):
+            self.assertIn(expected, titles)
+        self.assertTrue(all(item["url"] for item in ext_drives))
 
 
 if __name__ == "__main__":

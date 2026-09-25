@@ -265,9 +265,96 @@ def _second_year_prepa_external() -> list[Resource]:
             "https://t.me/hns2year/21932",
             "Curated external resources and modules for 2nd Year Prepa.",
         ),
-        resource("Polytech resources", "", "Add the Polytech resource folder."),
-        resource("USTHB resources", "", "Add the USTHB resource folder."),
-        resource("ESI resources", "", "Add the ESI resource folder."),
+        resource(
+            "Concours",
+            "https://drive.google.com/drive/folders/14fT5vsYbBKeBeUISKaGrczUDDq-azA7m",
+            "Drive pour la préparation du concours national d'accès aux grandes écoles.",
+        ),
+        resource(
+            "Easy CPST",
+            "https://drive.google.com/drive/folders/1D_GVXlCMqWW4JIQGW_W0GKmBqxt6hDgu",
+            "Drive et cours de préparation Easy CPST pour 2ème année préparatoire.",
+        ),
+        resource(
+            "Polytechnique Oran (ENPO)",
+            "https://drive.google.com/drive/folders/1x4V3hVL1IjjnGk-sp5hP3pGL6ZVy4rLG",
+            "Drive de cours et ressources de l'École Nationale Polytechnique d'Oran (ENPO Maurice Audin).",
+        ),
+        resource(
+            "Stud-dying for 2CP (ENPA)",
+            "https://drive.google.com/drive/folders/13q0JPSE525sFfZFjJeLZJUbJyX-IFOWh",
+            "Ressources de préparation 2CP ENP Alger (Stud-dying - Highly Recommended).",
+        ),
+        resource(
+            "Sujets ENP",
+            "https://drive.google.com/drive/folders/1-Ml9jhyILIUhcVDQrbIP3PVMvJlj_EZO",
+            "Archive de sujets d'examens et séries de l'École Nationale Polytechnique (ENP).",
+        ),
+        resource(
+            "ANALYSE CNCR",
+            "https://drive.google.com/drive/folders/17DEcT5R0rumQjqQzJ0J7WK8UTaN8TnFc",
+            "Dossier de préparation concours: Analyse mathématique.",
+        ),
+        resource(
+            "PHYSIQUE CNCR",
+            "https://drive.google.com/drive/folders/1fioP8I2m9wsIPPtxdsbSD6kV1pC42Azw",
+            "Dossier de préparation concours: Physique.",
+        ),
+        resource(
+            "CHIMIE CNCR",
+            "https://drive.google.com/drive/folders/1q8jis39Ny6mfRhm-81gZBLe6F-EIi7lQ",
+            "Dossier de préparation concours: Chimie.",
+        ),
+        resource(
+            "ANANUM CNCR",
+            "https://drive.google.com/drive/folders/1thVjH6eTeLxz5q0D09MwW77NLhQuI8yI",
+            "Dossier de préparation concours: Analyse Numérique.",
+        ),
+        resource(
+            "SJTS ENPC",
+            "https://drive.google.com/drive/folders/18cuQ8rT0nCO1WqColYWV3mujHJGdRvEQ",
+            "Sujets d'examens et d'entraînement de l'ENPC.",
+        ),
+        resource(
+            "TD ESSAT",
+            "https://drive.google.com/drive/folders/12Ve2uIVNAOKW5ef9RZRTr-Dsiyhgozxn",
+            "Fiches de travaux dirigés (TD) et exercices ESSAT.",
+        ),
+        resource(
+            "2CPST 2020/2021 (ENP Oran & Multi)",
+            "https://drive.google.com/drive/folders/1O_lnfzNmEGTyiGWDlTKWA7g7C4A7Ayq-",
+            "Archives 2CPST multi-écoles incluant l'ENP Oran.",
+        ),
+        resource(
+            "Deuxième année (ENPC)",
+            "https://drive.google.com/drive/folders/11bjQFahl2u0ZN0S9J-Dvk4gVkTTw2O9Y",
+            "Dossier d'archive 2ème année préparatoire ENPC.",
+        ),
+        resource(
+            "VOM",
+            "https://drive.google.com/drive/folders/1mOwd5XsPfEoLMJ06V_Urcg04FUwdurTr",
+            "Drive d'étude et révision Vibrations et Ondes Mécaniques (VOM).",
+        ),
+        resource(
+            "Sjts classe préparatoire (ENPC)",
+            "https://drive.google.com/drive/folders/14RJvM4DfSN97iWMvraz21eRwvaspGwYA",
+            "Sujets d'examens des classes préparatoires ENPC.",
+        ),
+        resource(
+            "SABRI STARTER PACK",
+            "https://drive.google.com/drive/folders/17G_noknx8xYSUaY2RRYdjLrzj_XUhBxZ",
+            "Pack complet de révision Sabri Starter Pack pour 2CPST.",
+        ),
+        resource(
+            "Sujets / Concours (Highly Recommended)",
+            "https://drive.google.com/drive/folders/1ErLsZY9qwGAUNHwNK5c7OeqMbBuQBWkn",
+            "Recueil d'annales et sujets de concours (Highly Recommended).",
+        ),
+        resource(
+            "ESSA Alger (Highly Recommended)",
+            "https://drive.google.com/drive/folders/1aY3Vvns-vrfptDMNBwHjNvkIXI2n8GT2",
+            "Dossier préparatoire ESSA Alger (Highly Recommended).",
+        ),
     ]
 
 
