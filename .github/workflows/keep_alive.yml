@@ -1,0 +1,23 @@
+name: Keep Render Bot Alive
+
+on:
+  schedule:
+    # Runs every 10 minutes (* / 10 is every 10 mins in cron syntax)
+    - cron: '*/10 * * * *'
+  workflow_dispatch: # Allows manual trigger from GitHub UI
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Render Service
+        env:
+          RENDER_APP_URL: ${{ secrets.APP_URL }}
+        run: |
+          if [ -z "$RENDER_APP_URL" ]; then
+            echo "Secret APP_URL is not set. Please set APP_URL in Repository Secrets."
+            exit 1
+          fi
+          echo "Sending ping to $RENDER_APP_URL/health"
+          curl -s -f "$RENDER_APP_URL/health" || curl -s "$RENDER_APP_URL/"
+          echo "Ping completed successfully."

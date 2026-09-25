@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: tel-bot-health
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python keep_alive.py
+    healthCheckPath: /health
+
+  - type: worker
+    name: tel-bot
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python bot.py
+    envVars:
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: LOG_LEVEL
+        value: INFO
+
+  - type: worker
+    name: tel-bot-sentinel
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python keep_alive_bot.py
+    envVars:
+      - key: KEEP_ALIVE_URL
+        sync: false
+      - key: LOG_LEVEL
+        value: INFO
