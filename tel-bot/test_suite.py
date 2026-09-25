@@ -347,9 +347,16 @@ class NavigationContractTests(unittest.TestCase):
             "SABRI STARTER PACK",
             "Sujets / Concours (Highly Recommended)",
             "ESSA Alger (Highly Recommended)",
+            "Concours National Complet (Sujets & Corrigés)",
+            "Drive Global 2CPST (Programme Complet)",
         ):
             self.assertIn(expected, titles)
         self.assertTrue(all(item["url"] for item in ext_drives))
+
+        # Check internal drive for 2nd year prepa also includes Drive Global 2CPST
+        int_drives = ACADEMIC_DATA["ST"]["years"][2]["categories"]["drives"]
+        int_titles = [item["title"] for item in int_drives]
+        self.assertIn("Drive Global 2CPST (Programme Complet)", int_titles)
 
 
 if __name__ == "__main__":

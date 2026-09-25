@@ -117,6 +117,11 @@ def _first_year_st_drives() -> list[Resource]:
 def _second_year_prepa_drives() -> list[Resource]:
     return [
         resource(
+            "Drive Global 2CPST (Programme Complet)",
+            "https://drive.google.com/drive/folders/1kwldpBJBkHH-AazSPukcyqqhKRUrIymX",
+            "Drive exhaustif regroupant tous les cours, TDs, TPs et examens étudiés en 2ème année préparatoire.",
+        ),
+        resource(
             "Drive Promo 2025/2026",
             "https://drive.google.com/drive/folders/1ToQnuvoAWAfd_bEo1DLt3cROBIVCpByh",
             "Internal Drive for 2nd Year Prepa, 2025/2026.",
@@ -354,6 +359,16 @@ def _second_year_prepa_external() -> list[Resource]:
             "ESSA Alger (Highly Recommended)",
             "https://drive.google.com/drive/folders/1aY3Vvns-vrfptDMNBwHjNvkIXI2n8GT2",
             "Dossier préparatoire ESSA Alger (Highly Recommended).",
+        ),
+        resource(
+            "Concours National Complet (Sujets & Corrigés)",
+            "https://drive.google.com/drive/folders/1Y3tctA0_elRjHve_FHaaBe0_WsSYg-Ia?usp=sharing",
+            "Drive complet regroupant l'ensemble des annales et sujets du concours national.",
+        ),
+        resource(
+            "Drive Global 2CPST (Programme Complet)",
+            "https://drive.google.com/drive/folders/1kwldpBJBkHH-AazSPukcyqqhKRUrIymX",
+            "Drive exhaustif regroupant tous les cours, TDs, TPs et examens étudiés en 2ème année préparatoire.",
         ),
     ]
 
