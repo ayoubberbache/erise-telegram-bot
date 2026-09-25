@@ -261,9 +261,9 @@ def _second_year_prepa_external() -> list[Resource]:
             "Telegram channel for national engineering concours preparation.",
         ),
         resource(
-            "External Resources — 2nd Prepa",
+            "External Links & Resources Topic (Telegram)",
             "https://t.me/hns2year/21932",
-            "Curated external resources and modules for 2nd Year Prepa.",
+            "Telegram group topic (hns2year) gathering curated external links, drives, and resources for 2nd Year Prepa.",
         ),
         resource(
             "Concours",

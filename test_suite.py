@@ -328,7 +328,7 @@ class NavigationContractTests(unittest.TestCase):
         titles = [item["title"] for item in ext_drives]
         for expected in (
             "National Contest Preparation (Concours ST)",
-            "External Resources — 2nd Prepa",
+            "External Links & Resources Topic (Telegram)",
             "Concours",
             "Easy CPST",
             "Polytechnique Oran (ENPO)",
