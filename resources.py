@@ -401,9 +401,29 @@ def _third_year_ener_gh_apps() -> list[Resource]:
             "Official code editor for development.",
         ),
         resource(
+            "SolidWorks",
+            "https://getintopc.com/softwares/3d-cad/solidworks-premium-2020-free-download/",
+            "SolidWorks 3D CAD modeling software installer from Get Into PC.",
+        ),
+        resource(
             "PVsyst",
             "https://getintopc.com/softwares/simulation/pvsyst-2024-free-download/",
             "Photovoltaic system design software installer from Get Into PC.",
+        ),
+        resource(
+            "Meteonorm",
+            "https://getintopc.com/softwares/simulation/meteonorm-2024-free-download/",
+            "Meteorological and solar irradiation database software installer from Get Into PC.",
+        ),
+        resource(
+            "Global Wind Atlas",
+            "https://globalwindatlas.info/",
+            "Free official wind resource assessment and wind energy potential mapping application.",
+        ),
+        resource(
+            "RETScreen Expert",
+            "https://getintopc.com/softwares/simulation/retscreen-expert-free-download/",
+            "Clean energy management and renewable project feasibility software from Get Into PC.",
         ),
         resource(
             "Modelica (OpenModelica)",
@@ -451,6 +471,21 @@ def _software_tools_for_specialty(specialty: str, year: int) -> list[Resource]:
                 "Photovoltaic system design software installer from Get Into PC.",
             ),
             resource(
+                "Meteonorm",
+                "https://getintopc.com/softwares/simulation/meteonorm-2024-free-download/",
+                "Meteorological and solar irradiation database software installer from Get Into PC.",
+            ),
+            resource(
+                "Global Wind Atlas",
+                "https://globalwindatlas.info/",
+                "Free official wind resource assessment and wind energy potential mapping application.",
+            ),
+            resource(
+                "RETScreen Expert",
+                "https://getintopc.com/softwares/simulation/retscreen-expert-free-download/",
+                "Clean energy management and renewable project feasibility software from Get Into PC.",
+            ),
+            resource(
                 "HOMER Pro",
                 "https://getintopc.com/softwares/electrical-engineering/homer-pro-free-download/",
                 "Microgrid and hybrid renewable systems optimization installer from Get Into PC.",
@@ -458,6 +493,16 @@ def _software_tools_for_specialty(specialty: str, year: int) -> list[Resource]:
         ])
     elif specialty == "GH":
         tools.extend([
+            resource(
+                "SolidWorks",
+                "https://getintopc.com/softwares/3d-cad/solidworks-premium-2020-free-download/",
+                "SolidWorks 3D CAD modeling software installer from Get Into PC.",
+            ),
+            resource(
+                "RETScreen Expert",
+                "https://getintopc.com/softwares/simulation/retscreen-expert-free-download/",
+                "Clean energy management and renewable project feasibility software from Get Into PC.",
+            ),
             resource(
                 "Modelica (OpenModelica)",
                 "https://openmodelica.org/download/download-windows/",
