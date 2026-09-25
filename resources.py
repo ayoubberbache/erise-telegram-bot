@@ -170,6 +170,11 @@ def _third_year_IRIIA_drives() -> list[Resource]:
             "https://drive.google.com/drive/folders/1gK46myB5nJSGeUuYXUszM5eU25JudwgI?usp=drive_link",
             "Internal Drive for 3rd Year IRIIA, Promo 2024/2025.",
         ),
+        resource(
+            "Drive Promo 2022/2023 — 3rd Year IRIIA",
+            "https://drive.google.com/drive/folders/1JICAObH9oNE2fkOq0_n5rPTkf_pIm6HO",
+            "Internal Drive for 3rd Year IRIIA, Promo 2022/2023.",
+        ),
     ]
 
 

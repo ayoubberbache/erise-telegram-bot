@@ -70,8 +70,10 @@ class ResourceDataTests(unittest.TestCase):
         specialty = ACADEMIC_DATA["ST"]["years"][3]["specialties"]["IRIIA"]
         self.assertEqual(specialty["label"], "IRIIA — Intelligent Systems")
         drives = specialty["categories"]["drives"]
-        self.assertEqual(len(drives), 2)
+        self.assertEqual(len(drives), 3)
         self.assertTrue(all(item["url"] for item in drives))
+        titles = [item["title"] for item in drives]
+        self.assertIn("Drive Promo 2022/2023 — 3rd Year IRIIA", titles)
 
     def test_fourth_year_iriia_uses_the_supplied_resources(self) -> None:
         specialty = ACADEMIC_DATA["ST"]["years"][4]["specialties"]["IRIIA"]
