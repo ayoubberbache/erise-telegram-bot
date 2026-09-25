@@ -117,6 +117,20 @@ class ResourceDataTests(unittest.TestCase):
                 overleaf = next(item for item in apps if item["title"] == "Overleaf (LaTeX)")
                 self.assertEqual(overleaf["url"], "https://www.overleaf.com/")
 
+    def test_external_drives_only_available_for_assigned_year_and_specialty(self) -> None:
+        # Year 2 Prepa has external drives assigned
+        st_y2_external = ACADEMIC_DATA["ST"]["years"][2]["categories"]["external"]
+        self.assertGreater(len(st_y2_external), 0)
+        self.assertTrue(any(bool(item["url"]) for item in st_y2_external))
+
+        # Year 1 ST does not have external drives assigned
+        st_y1_external = ACADEMIC_DATA["ST"]["years"][1]["categories"]["external"]
+        self.assertEqual(len(st_y1_external), 0)
+
+        # Year 3 IRIIA does not have external drives assigned
+        iriia_external = ACADEMIC_DATA["ST"]["years"][3]["specialties"]["IRIIA"]["categories"]["external"]
+        self.assertEqual(len(iriia_external), 0)
+
 
 class NavigationContractTests(unittest.TestCase):
     def test_bot_does_not_contain_hardcoded_http_links(self) -> None:

@@ -130,11 +130,6 @@ def _second_year_prepa_drives() -> list[Resource]:
             "https://t.me/summeries_2nd_prepa",
             "Curated course summaries and revision materials for 2nd Year Prepa.",
         ),
-        resource(
-            "Group External Resources — 2nd Prepa",
-            "https://t.me/hns2year/21932",
-            "External resources and exercises for 2nd Year Prepa.",
-        ),
     ]
 
 
@@ -223,7 +218,7 @@ def _fourth_year_GE_drives() -> list[Resource]:
     ]
 
 
-def _external_drives() -> list[Resource]:
+def _second_year_prepa_external() -> list[Resource]:
     return [
         resource(
             "National Contest Preparation (Concours ST)",
@@ -379,7 +374,7 @@ def _categories(
 ) -> CategoryMap:
     return {
         "drives": internal_drives if internal_drives is not None else _internal_drives(),
-        "external": external_drives if external_drives is not None else _external_drives(),
+        "external": external_drives if external_drives is not None else [],
         "apps": software_tools if software_tools is not None else _software_tools(),
         "youtube": _youtube_playlists(),
     }
@@ -389,10 +384,12 @@ def _specialty_categories(
     specialty: str,
     year: int = 3,
     internal_drives: list[Resource] | None = None,
+    external_drives: list[Resource] | None = None,
 ) -> CategoryMap:
     categories = _categories(
         internal_drives=internal_drives,
         software_tools=_software_tools_for_specialty(specialty, year),
+        external_drives=external_drives,
     )
     categories["youtube"] = [
         resource(
@@ -426,7 +423,10 @@ ACADEMIC_DATA: Final[dict[str, dict[str, object]]] = {
             },
             2: {
                 "label": "Year 2 — Prepa",
-                "categories": _categories(internal_drives=_second_year_prepa_drives()),
+                "categories": _categories(
+                    internal_drives=_second_year_prepa_drives(),
+                    external_drives=_second_year_prepa_external(),
+                ),
             },
             3: {
                 "label": "Year 3 — Engineering Cycle",
