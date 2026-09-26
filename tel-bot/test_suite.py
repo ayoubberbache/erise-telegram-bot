@@ -74,7 +74,7 @@ class ResourceDataTests(unittest.TestCase):
         specialty = ACADEMIC_DATA["ST"]["years"][3]["specialties"]["ENER_GH"]
         self.assertEqual(specialty["label"], "ENER & GH — Renewable Energies & Green Hydrogen")
         drives = specialty["categories"]["drives"]
-        self.assertEqual(len(drives), 4)
+        self.assertEqual(len(drives), 5)
         self.assertTrue(all(item["url"] for item in drives))
         # ENER and GH aliases in year 3 resolve to ENER_GH
         self.assertEqual(ACADEMIC_DATA["ST"]["years"][3]["specialties"]["ENER"], specialty)
@@ -86,6 +86,7 @@ class ResourceDataTests(unittest.TestCase):
         for expected in (
             "SolidWorks",
             "PVsyst",
+            "PVGIS",
             "Meteonorm",
             "Global Wind Atlas",
             "RETScreen Expert",
@@ -104,12 +105,13 @@ class ResourceDataTests(unittest.TestCase):
             self.assertNotIn(moved, titles)
         self.assertTrue(all(item["url"] for item in apps))
 
-        # Check Get Into PC links for apps available there, and official site for Wind Atlas
+        # Check Get Into PC links for apps available there, and official site for Wind Atlas and PVGIS
         by_title = {item["title"]: item["url"] for item in apps}
         self.assertIn("getintopc.com", by_title["SolidWorks"])
         self.assertIn("getintopc.com", by_title["Meteonorm"])
         self.assertIn("getintopc.com", by_title["RETScreen Expert"])
         self.assertIn("globalwindatlas.info", by_title["Global Wind Atlas"])
+        self.assertIn("pvg_tools", by_title["PVGIS"])
 
     def test_fifth_year_gh_apps_contain_advanced_hydrogen_tools(self) -> None:
         y5_gh_apps = ACADEMIC_DATA["ST"]["years"][5]["specialties"]["GH"]["categories"]["apps"]
@@ -131,23 +133,39 @@ class ResourceDataTests(unittest.TestCase):
 
     def test_first_year_st_uses_the_supplied_resources(self) -> None:
         drives = ACADEMIC_DATA["ST"]["years"][1]["categories"]["drives"]
-        self.assertEqual(len(drives), 3)
+        self.assertEqual(len(drives), 5)
         self.assertTrue(all(item["url"] for item in drives))
+        titles = [item["title"] for item in drives]
+        self.assertIn("Drive Promo 2025/2026 — 1st Year ST", titles)
+        self.assertIn("Drive Promo 2024/2025 — 1st Year ST", titles)
 
     def test_third_year_iriia_uses_the_supplied_resources(self) -> None:
         specialty = ACADEMIC_DATA["ST"]["years"][3]["specialties"]["IRIIA"]
         self.assertEqual(specialty["label"], "IRIIA — Intelligent Systems")
         drives = specialty["categories"]["drives"]
-        self.assertEqual(len(drives), 3)
+        self.assertEqual(len(drives), 5)
         self.assertTrue(all(item["url"] for item in drives))
         titles = [item["title"] for item in drives]
         self.assertIn("Drive Promo 2022/2023 — 3rd Year IRIIA", titles)
+        self.assertIn("Drive Promo 2021/2022 — 3rd Year IRIIA", titles)
+
+    def test_third_year_ue_uses_the_supplied_resources(self) -> None:
+        specialty = ACADEMIC_DATA["ST"]["years"][3]["specialties"]["uE"]
+        self.assertEqual(specialty["label"], "µE — Microelectronics")
+        drives = specialty["categories"]["drives"]
+        self.assertEqual(len(drives), 3)
+        self.assertTrue(all(item["url"] for item in drives))
+        titles = [item["title"] for item in drives]
+        self.assertIn("Drive Promo 2022/2023 (Part 1) — 3rd Year µE", titles)
+        self.assertIn("Drive Promo 2022/2023 (Part 2) — 3rd Year µE", titles)
 
     def test_fourth_year_iriia_uses_the_supplied_resources(self) -> None:
         specialty = ACADEMIC_DATA["ST"]["years"][4]["specialties"]["IRIIA"]
         drives = specialty["categories"]["drives"]
-        self.assertEqual(len(drives), 2)
+        self.assertEqual(len(drives), 3)
         self.assertTrue(all(item["url"] for item in drives))
+        titles = [item["title"] for item in drives]
+        self.assertIn("Drive Promo 2022/2023 — 4th Year IRIIA", titles)
 
     def test_ge_specialty_uses_the_supplied_resources(self) -> None:
         drives_y3 = ACADEMIC_DATA["ST"]["years"][3]["specialties"]["GE"]["categories"]["drives"]
@@ -157,6 +175,11 @@ class ResourceDataTests(unittest.TestCase):
         drives_y4 = ACADEMIC_DATA["ST"]["years"][4]["specialties"]["GE"]["categories"]["drives"]
         self.assertEqual(len(drives_y4), 2)
         self.assertTrue(all(item["url"] for item in drives_y4))
+
+        drives_y5 = ACADEMIC_DATA["ST"]["years"][5]["specialties"]["GE"]["categories"]["drives"]
+        self.assertEqual(len(drives_y5), 1)
+        self.assertTrue(all(item["url"] for item in drives_y5))
+        self.assertIn("Drive Promo 2023/2024 (2nd Promo) — 5th Year GE", [item["title"] for item in drives_y5])
 
     def test_third_year_iriia_apps_contain_all_requested_tools(self) -> None:
         apps = ACADEMIC_DATA["ST"]["years"][3]["specialties"]["IRIIA"]["categories"]["apps"]

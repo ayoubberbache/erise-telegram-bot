@@ -116,19 +116,29 @@ def _internal_drives() -> list[Resource]:
 def _first_year_st_drives() -> list[Resource]:
     return [
         resource(
-            "Group Promo 2026/2027",
-            "https://t.me/+9nAvFiCXiR9lMTg0",
-            "Telegram group for 1st Year ST students, 2026/2027.",
+            "Drive Promo 2025/2026 — 1st Year ST",
+            "https://drive.google.com/drive/folders/1A7ok5fCeOc1pGer26ZcMCALYO1BSlcLz",
+            "Drive Promo 2025/2026: Lectures, tutorial works (TD), exams, summaries, and teachers' emails.",
         ),
         resource(
-            "Group Promo 2025/2026",
+            "Drive Promo 2024/2025 — 1st Year ST",
+            "https://drive.google.com/drive/folders/1OHGebidij9ecaPfgYyHSeWEYTwnLcG-k",
+            "Drive Promo 2024/2025: Chapitres, TDs avec solutions, interros, contrôles, résumés et rattrapages.",
+        ),
+        resource(
+            "Study Groupchat 2024/2025 — 1st Year ST",
             "https://t.me/+RJmZC1MMmiNhMzJk",
-            "Telegram topic with academic resources for 1st Year ST, 2025/2026.",
+            "Telegram study groupchat for 1st Year ST students, Promo 2024/2025.",
         ),
         resource(
-            "Group Promo 2024/2025",
+            "Group Promo 2024/2025 — 1st Year ST",
             "https://t.me/hns1year",
             "Telegram main resource channel for 1st Year ST, Promo 2024/2025.",
+        ),
+        resource(
+            "Group Promo 2026/2027 — 1st Year ST",
+            "https://t.me/+9nAvFiCXiR9lMTg0",
+            "Telegram group for 1st Year ST students, 2026/2027.",
         ),
     ]
 
@@ -194,14 +204,19 @@ def _gh_channel_resource() -> Resource:
 def _third_year_enr_drives() -> list[Resource]:
     return [
         resource(
-            "Drive Promo 2021/2022 — 3rd Year ENR",
+            "Drive Promo 2021/2023 — 3rd Year ENR",
             "https://drive.google.com/drive/folders/1LQNtlCJ1Khw6Z4tDkfsxaeEQkLGW0WG9",
-            "Internal Drive for 3rd Year Renewable Energies, 2021/2022.",
+            "Internal Drive for 3rd Year Renewable Energies, Promo 2021/2023.",
         ),
         resource(
             "Drive Promo 2023/2024 — 3rd Year ENR",
             "https://drive.google.com/drive/folders/1t9xszm0ORlveTo7jj0SOVQZMpoxo2wOA?usp=drive_link",
             "Internal Drive for 3rd Year Renewable Energies, 2023/2024.",
+        ),
+        resource(
+            "Drive Multi-Specialty 1st Promo (ENER, IRIIA, µE)",
+            "https://drive.google.com/drive/folders/1Q22KdlSS6B9TzIi0RrozBeAQtobBpvFx",
+            "Shared Google Drive folder for 1st Promo (Renewable Energies, IRIIA, and Microelectronics).",
         ),
         resource(
             "Group Promo 2025/2026 — 3rd Year ENR & GH",
@@ -229,6 +244,36 @@ def _third_year_IRIIA_drives() -> list[Resource]:
             "https://drive.google.com/drive/folders/1JICAObH9oNE2fkOq0_n5rPTkf_pIm6HO",
             "Internal Drive for 3rd Year IRIIA, Promo 2022/2023.",
         ),
+        resource(
+            "Drive Promo 2021/2022 — 3rd Year IRIIA",
+            "https://drive.google.com/drive/folders/13tfGcsrtiD0aOU-Rr5_f2OMtpkSt4ExW",
+            "Internal Drive for 3rd Year IRIIA, Promo 2021/2022.",
+        ),
+        resource(
+            "Drive Multi-Specialty 1st Promo (IRIIA, ENER, µE)",
+            "https://drive.google.com/drive/folders/1Q22KdlSS6B9TzIi0RrozBeAQtobBpvFx",
+            "Shared Google Drive folder for 1st Promo (IRIIA, Renewable Energies, and Microelectronics).",
+        ),
+    ]
+
+
+def _third_year_uE_drives() -> list[Resource]:
+    return [
+        resource(
+            "Drive Promo 2022/2023 (Part 1) — 3rd Year µE",
+            "https://drive.google.com/drive/folders/18yoRnOP358rHrmyvWve2fKgCqQL_Sttb",
+            "Internal Drive for 3rd Year Microelectronics (µE), Promo 2022/2023.",
+        ),
+        resource(
+            "Drive Promo 2022/2023 (Part 2) — 3rd Year µE",
+            "https://drive.google.com/drive/folders/1cZhkRcepX3K4kIcr4ovnjNnbkPQWW6uf?usp=sharing",
+            "Internal Drive for 3rd Year Microelectronics (µE), Promo 2022/2023.",
+        ),
+        resource(
+            "Drive Promo 2022/2023 & Multi-Promo (µE, IRIIA, ENER)",
+            "https://drive.google.com/drive/folders/1Q22KdlSS6B9TzIi0RrozBeAQtobBpvFx",
+            "Internal Drive for Microelectronics 2022/2023 including 1st Promo IRIIA & Energy archives.",
+        ),
     ]
 
 
@@ -243,6 +288,11 @@ def _fourth_year_IRIIA_drives() -> list[Resource]:
             "Drive Promo 2023/2024 — 4th Year IRIIA",
             "https://drive.google.com/drive/folders/1_tPjRFBIkS7cPBVcsYt-dbW8dsJyQ0-F?usp=sharing",
             "Internal Drive for 4th Year IRIIA, Promo 2023/2024.",
+        ),
+        resource(
+            "Drive Promo 2022/2023 — 4th Year IRIIA",
+            "https://drive.google.com/drive/folders/11MkiaJBWE02JMy0rIPufIhnBPma4saS2",
+            "Internal Drive for 4th Year IRIIA, Promo 2022/2023.",
         ),
     ]
 
@@ -273,6 +323,16 @@ def _fourth_year_GE_drives() -> list[Resource]:
             "Drive 1st Promo — 3rd & 4th Year GE",
             "https://drive.google.com/drive/folders/1eWj9VE5y1uv9-t-sKmKzVvJwBjfS4woE",
             "Shared Google Drive folder for 1st Promo (3rd & 4th Year Electrical Engineering).",
+        ),
+    ]
+
+
+def _fifth_year_GE_drives() -> list[Resource]:
+    return [
+        resource(
+            "Drive Promo 2023/2024 (2nd Promo) — 5th Year GE",
+            "https://drive.google.com/drive/folders/1h_e1QO3lbqjsPZ70auR3f5bSY0AdNoiR?usp=drive_link",
+            "Internal Drive for 5th Year Electrical Engineering (2nd Promo).",
         ),
     ]
 
@@ -532,6 +592,11 @@ def _third_year_ener_gh_apps() -> list[Resource]:
             "Photovoltaic system design software installer from Get Into PC.",
         ),
         resource(
+            "PVGIS",
+            "https://re.jrc.ec.europa.eu/pvg_tools/en/",
+            "European Commission official photovoltaic geographical information and solar estimation tool.",
+        ),
+        resource(
             "Meteonorm",
             "https://getintopc.com/softwares/simulation/meteonorm-2024-free-download/",
             "Meteorological and solar irradiation database software installer from Get Into PC.",
@@ -610,6 +675,11 @@ def _software_tools_for_specialty(specialty: str, year: int) -> list[Resource]:
     ]
     if specialty == "ENER":
         tools.extend([
+            resource(
+                "PVGIS",
+                "https://re.jrc.ec.europa.eu/pvg_tools/en/",
+                "European Commission official photovoltaic geographical information and solar estimation tool.",
+            ),
             resource(
                 "PVsyst",
                 "https://getintopc.com/softwares/simulation/pvsyst-2024-free-download/",
@@ -746,6 +816,7 @@ ACADEMIC_DATA: Final[dict[str, dict[str, object]]] = {
                                 internal_drives={
                                     "ENER_GH": _third_year_enr_drives(),
                                     "IRIIA": _third_year_IRIIA_drives(),
+                                    "uE": _third_year_uE_drives(),
                                     "GE": _third_year_GE_drives(),
                                 }.get(key),
                             ),
@@ -782,6 +853,7 @@ ACADEMIC_DATA: Final[dict[str, dict[str, object]]] = {
                             year=5,
                             internal_drives={
                                 "GH": [_gh_channel_resource(), *_internal_drives()],
+                                "GE": _fifth_year_GE_drives(),
                             }.get(key),
                         ),
                     }
