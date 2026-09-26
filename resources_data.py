@@ -277,6 +277,21 @@ def _third_year_uE_drives() -> list[Resource]:
     ]
 
 
+def _third_year_uE_youtube() -> list[Resource]:
+    return [
+        resource(
+            "All About Electronics",
+            "https://www.youtube.com/@allaboutelectronics",
+            "Curated YouTube channel for electronics, semiconductors, and circuit design tutorials.",
+        ),
+        resource(
+            "Electrical Engineering App",
+            "https://www.youtube.com/@electrical-engineering-app",
+            "Curated YouTube channel covering electrical engineering, circuits, and electronic systems.",
+        ),
+    ]
+
+
 def _fourth_year_IRIIA_drives() -> list[Resource]:
     return [
         resource(
@@ -305,9 +320,9 @@ def _third_year_GE_drives() -> list[Resource]:
             "Shared Google Drive folder for 1st Promo (3rd & 4th Year Electrical Engineering).",
         ),
         resource(
-            "Group 3rd Promo — 3rd Year GE",
+            "Group 3rd Promo — GE (3rd & 4th Year)",
             "https://t.me/electricalenghns",
-            "Telegram resource channel/group for 3rd Promo (3rd Year Electrical Engineering).",
+            "Telegram resource channel/group for Electrical Engineering students (3rd & 4th Year).",
         ),
     ]
 
@@ -323,6 +338,11 @@ def _fourth_year_GE_drives() -> list[Resource]:
             "Drive 1st Promo — 3rd & 4th Year GE",
             "https://drive.google.com/drive/folders/1eWj9VE5y1uv9-t-sKmKzVvJwBjfS4woE",
             "Shared Google Drive folder for 1st Promo (3rd & 4th Year Electrical Engineering).",
+        ),
+        resource(
+            "Group 3rd Promo — GE (3rd & 4th Year)",
+            "https://t.me/electricalenghns",
+            "Telegram resource channel/group for Electrical Engineering students (3rd & 4th Year).",
         ),
     ]
 
@@ -755,20 +775,24 @@ def _specialty_categories(
     year: int = 3,
     internal_drives: list[Resource] | None = None,
     external_drives: list[Resource] | None = None,
+    youtube_playlists: list[Resource] | None = None,
 ) -> CategoryMap:
     categories = _categories(
         internal_drives=internal_drives,
         software_tools=_software_tools_for_specialty(specialty, year),
         external_drives=external_drives,
     )
-    categories["youtube"] = [
-        resource(
-            f"{specialty} course playlist",
-            "",
-            f"Add the curated {specialty} playlist URL.",
-        ),
-        *categories["youtube"],
-    ]
+    if youtube_playlists is not None:
+        categories["youtube"] = youtube_playlists
+    else:
+        categories["youtube"] = [
+            resource(
+                f"{specialty} course playlist",
+                "",
+                f"Add the curated {specialty} playlist URL.",
+            ),
+            *categories["youtube"],
+        ]
     return categories
 
 
@@ -818,6 +842,9 @@ ACADEMIC_DATA: Final[dict[str, dict[str, object]]] = {
                                     "IRIIA": _third_year_IRIIA_drives(),
                                     "uE": _third_year_uE_drives(),
                                     "GE": _third_year_GE_drives(),
+                                }.get(key),
+                                youtube_playlists={
+                                    "uE": _third_year_uE_youtube(),
                                 }.get(key),
                             ),
                         }

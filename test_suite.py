@@ -159,6 +159,14 @@ class ResourceDataTests(unittest.TestCase):
         self.assertIn("Drive Promo 2022/2023 (Part 1) — 3rd Year µE", titles)
         self.assertIn("Drive Promo 2022/2023 (Part 2) — 3rd Year µE", titles)
 
+        # YouTube playlists for 3rd Year µE
+        yt = specialty["categories"]["youtube"]
+        self.assertEqual(len(yt), 2)
+        self.assertTrue(all(item["url"] for item in yt))
+        yt_titles = [item["title"] for item in yt]
+        self.assertIn("All About Electronics", yt_titles)
+        self.assertIn("Electrical Engineering App", yt_titles)
+
     def test_fourth_year_iriia_uses_the_supplied_resources(self) -> None:
         specialty = ACADEMIC_DATA["ST"]["years"][4]["specialties"]["IRIIA"]
         drives = specialty["categories"]["drives"]
@@ -171,10 +179,12 @@ class ResourceDataTests(unittest.TestCase):
         drives_y3 = ACADEMIC_DATA["ST"]["years"][3]["specialties"]["GE"]["categories"]["drives"]
         self.assertEqual(len(drives_y3), 2)
         self.assertTrue(all(item["url"] for item in drives_y3))
+        self.assertIn("Group 3rd Promo — GE (3rd & 4th Year)", [item["title"] for item in drives_y3])
 
         drives_y4 = ACADEMIC_DATA["ST"]["years"][4]["specialties"]["GE"]["categories"]["drives"]
-        self.assertEqual(len(drives_y4), 2)
+        self.assertEqual(len(drives_y4), 3)
         self.assertTrue(all(item["url"] for item in drives_y4))
+        self.assertIn("Group 3rd Promo — GE (3rd & 4th Year)", [item["title"] for item in drives_y4])
 
         drives_y5 = ACADEMIC_DATA["ST"]["years"][5]["specialties"]["GE"]["categories"]["drives"]
         self.assertEqual(len(drives_y5), 1)
