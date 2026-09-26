@@ -550,6 +550,53 @@ def _third_year_IRIIA_apps() -> list[Resource]:
     ]
 
 
+def _fourth_year_IRIIA_apps() -> list[Resource]:
+    return [
+        _overleaf_resource(),
+        _matlab_resource(),
+        resource(
+            "VS Code",
+            "https://code.visualstudio.com/download",
+            "Official Visual Studio Code editor download.",
+        ),
+        resource(
+            "STM32CubeMX",
+            "https://getintopc.com/softwares/development/stmicroelectronics-stm32cubemx-2020-free-download/",
+            "STM32 microcontroller configuration and code generation tool for embedded systems.",
+        ),
+        resource(
+            "VMware Workstation Pro",
+            "https://getintopc.com/softwares/virtualization/vmware-workstation-pro-2024-free-download/",
+            "Virtualization software for parallel computing and multi-OS environments from Get Into PC.",
+        ),
+        resource(
+            "Eclipse IDE",
+            "https://getintopc.com/softwares/development/eclipse-ide-2023-free-download/",
+            "Eclipse IDE for N-tier application development and network socket programming.",
+        ),
+        resource(
+            "Apache NetBeans",
+            "https://getintopc.com/softwares/development/netbeans-ide-free-download/",
+            "Apache NetBeans IDE installer from Get Into PC for N-tier architectures.",
+        ),
+        resource(
+            "Automgen 8",
+            "https://www.irai.net/automgen/",
+            "Official IRAI Automgen 8 software for Grafcet, PLC automation, and system control.",
+        ),
+        resource(
+            "Factory I/O",
+            "https://getintopc.com/softwares/simulation/factory-io-free-download-9233633/",
+            "3D factory simulation software for PLC automation training from Get Into PC.",
+        ),
+        resource(
+            "GNS3",
+            "https://www.gns3.com/software/download",
+            "Official free GNS3 network software simulator for advanced networking labs.",
+        ),
+    ]
+
+
 def _first_year_software_tools() -> list[Resource]:
     return [
         resource(
@@ -679,6 +726,8 @@ def _fifth_year_gh_apps() -> list[Resource]:
 def _software_tools_for_specialty(specialty: str, year: int) -> list[Resource]:
     if specialty == "IRIIA" and year == 3:
         return _third_year_IRIIA_apps()
+    if specialty == "IRIIA" and year == 4:
+        return _fourth_year_IRIIA_apps()
     if (specialty in ("ENER", "ENER_GH", "GH") and year == 3) or specialty == "ENER_GH":
         return _third_year_ener_gh_apps()
     if specialty == "GH" and year == 5:

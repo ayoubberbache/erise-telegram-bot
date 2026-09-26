@@ -175,6 +175,34 @@ class ResourceDataTests(unittest.TestCase):
         titles = [item["title"] for item in drives]
         self.assertIn("Drive Promo 2022/2023 — 4th Year IRIIA", titles)
 
+    def test_fourth_year_iriia_apps_contain_requested_tools(self) -> None:
+        apps = ACADEMIC_DATA["ST"]["years"][4]["specialties"]["IRIIA"]["categories"]["apps"]
+        titles = [item["title"] for item in apps]
+        expected = [
+            "Overleaf (LaTeX)",
+            "MATLAB",
+            "VS Code",
+            "STM32CubeMX",
+            "VMware Workstation Pro",
+            "Eclipse IDE",
+            "Apache NetBeans",
+            "Automgen 8",
+            "Factory I/O",
+            "GNS3",
+        ]
+        for name in expected:
+            self.assertIn(name, titles)
+        self.assertTrue(all(item["url"] for item in apps))
+
+        by_title = {item["title"]: item["url"] for item in apps}
+        self.assertIn("getintopc.com", by_title["STM32CubeMX"])
+        self.assertIn("getintopc.com", by_title["VMware Workstation Pro"])
+        self.assertIn("getintopc.com", by_title["Eclipse IDE"])
+        self.assertIn("getintopc.com", by_title["Apache NetBeans"])
+        self.assertEqual("https://www.irai.net/automgen/", by_title["Automgen 8"])
+        self.assertIn("getintopc.com", by_title["Factory I/O"])
+        self.assertEqual("https://www.gns3.com/software/download", by_title["GNS3"])
+
     def test_ge_specialty_uses_the_supplied_resources(self) -> None:
         drives_y3 = ACADEMIC_DATA["ST"]["years"][3]["specialties"]["GE"]["categories"]["drives"]
         self.assertEqual(len(drives_y3), 2)
