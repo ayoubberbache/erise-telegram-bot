@@ -105,11 +105,14 @@ class ResourceDataTests(unittest.TestCase):
             self.assertNotIn(moved, titles)
         self.assertTrue(all(item["url"] for item in apps))
 
-        # Check Get Into PC links for apps available there, and official site for Wind Atlas and PVGIS
+        # Check Get Into PC links for apps available there, and official site for Wind Atlas, PVGIS, and RETScreen
         by_title = {item["title"]: item["url"] for item in apps}
         self.assertIn("getintopc.com", by_title["SolidWorks"])
         self.assertIn("getintopc.com", by_title["Meteonorm"])
-        self.assertIn("getintopc.com", by_title["RETScreen Expert"])
+        self.assertEqual(
+            "https://natural-resources.canada.ca/maps-tools-publications/tools-applications/retscreen",
+            by_title["RETScreen Expert"],
+        )
         self.assertIn("globalwindatlas.info", by_title["Global Wind Atlas"])
         self.assertIn("pvg_tools", by_title["PVGIS"])
 
@@ -195,12 +198,15 @@ class ResourceDataTests(unittest.TestCase):
         self.assertTrue(all(item["url"] for item in apps))
 
         by_title = {item["title"]: item["url"] for item in apps}
-        self.assertIn("getintopc.com", by_title["STM32CubeMX"])
+        self.assertEqual("https://www.st.com/en/development-tools/stm32cubemx.html", by_title["STM32CubeMX"])
         self.assertIn("getintopc.com", by_title["VMware Workstation Pro"])
-        self.assertIn("getintopc.com", by_title["Eclipse IDE"])
-        self.assertIn("getintopc.com", by_title["Apache NetBeans"])
+        self.assertEqual(
+            "https://www.eclipse.org/downloads/download.php?file=/oomph/epp/2026-09/R/eclipse-inst-jre-win64.exe",
+            by_title["Eclipse IDE"],
+        )
+        self.assertEqual("https://netbeans.apache.org/front/main/download/", by_title["Apache NetBeans"])
         self.assertEqual("https://www.irai.net/automgen/", by_title["Automgen 8"])
-        self.assertIn("getintopc.com", by_title["Factory I/O"])
+        self.assertEqual("https://factoryio.com/download-archive/", by_title["Factory I/O"])
         self.assertEqual("https://www.gns3.com/software/download", by_title["GNS3"])
 
     def test_ge_specialty_uses_the_supplied_resources(self) -> None:
@@ -293,8 +299,8 @@ class ResourceDataTests(unittest.TestCase):
         by_title = {item["title"]: item["url"] for item in iriia_apps}
         self.assertIn("getintopc.com", by_title["PyCharm"])
         self.assertIn("getintopc.com", by_title["VirtualBox"])
-        self.assertIn("getintopc.com", by_title["Apache NetBeans"])
-        self.assertIn("getintopc.com", by_title["Cisco Packet Tracer"])
+        self.assertEqual("https://netbeans.apache.org/front/main/download/", by_title["Apache NetBeans"])
+        self.assertEqual("https://www.netacad.com/resources/lab-downloads", by_title["Cisco Packet Tracer"])
         self.assertIn("getintopc.com", by_title["MATLAB"])
 
     def test_re2sd_channel_in_all_three_years_of_gh(self) -> None:

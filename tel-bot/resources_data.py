@@ -488,6 +488,22 @@ def _matlab_resource() -> Resource:
     )
 
 
+def _retscreen_resource() -> Resource:
+    return resource(
+        "RETScreen Expert",
+        "https://natural-resources.canada.ca/maps-tools-publications/tools-applications/retscreen",
+        "Official Natural Resources Canada portal to download RETScreen Expert clean energy management software.",
+    )
+
+
+def _netbeans_resource() -> Resource:
+    return resource(
+        "Apache NetBeans",
+        "https://netbeans.apache.org/front/main/download/",
+        "Official Apache NetBeans IDE download page for Java and N-tier application development.",
+    )
+
+
 def _third_year_IRIIA_apps() -> list[Resource]:
     return [
         resource(
@@ -515,15 +531,11 @@ def _third_year_IRIIA_apps() -> list[Resource]:
             "https://getintopc.com/softwares/development/jetbrains-pycharm-pro-2023-free-download/",
             "JetBrains PyCharm Professional IDE installer from Get Into PC.",
         ),
-        resource(
-            "Apache NetBeans",
-            "https://getintopc.com/softwares/development/netbeans-ide-free-download/",
-            "Apache NetBeans IDE installer from Get Into PC.",
-        ),
+        _netbeans_resource(),
         resource(
             "VUE (Mind Mapping)",
-            "https://vue.tufts.edu/",
-            "Tufts Visual Understanding Environment for concept mapping and mind maps.",
+            "https://github.com/VUE/VUE/releases",
+            "Official open-source Tufts Visual Understanding Environment (VUE) releases for concept mapping.",
         ),
         _overleaf_resource(),
         _matlab_resource(),
@@ -539,8 +551,8 @@ def _third_year_IRIIA_apps() -> list[Resource]:
         ),
         resource(
             "Cisco Packet Tracer",
-            "https://getintopc.com/softwares/network/cisco-packet-tracer-2024-free-download/",
-            "Cisco Packet Tracer network simulation software installer from Get Into PC.",
+            "https://www.netacad.com/resources/lab-downloads",
+            "Official Cisco Networking Academy portal to access and download Cisco Packet Tracer.",
         ),
         resource(
             "Huawei eNSP (Network Simulator)",
@@ -561,8 +573,8 @@ def _fourth_year_IRIIA_apps() -> list[Resource]:
         ),
         resource(
             "STM32CubeMX",
-            "https://getintopc.com/softwares/development/stmicroelectronics-stm32cubemx-2020-free-download/",
-            "STM32 microcontroller configuration and code generation tool for embedded systems.",
+            "https://www.st.com/en/development-tools/stm32cubemx.html",
+            "Official STMicroelectronics page to download STM32CubeMX graphical MCU configuration tool.",
         ),
         resource(
             "VMware Workstation Pro",
@@ -571,14 +583,10 @@ def _fourth_year_IRIIA_apps() -> list[Resource]:
         ),
         resource(
             "Eclipse IDE",
-            "https://getintopc.com/softwares/development/eclipse-ide-2023-free-download/",
-            "Eclipse IDE for N-tier application development and network socket programming.",
+            "https://www.eclipse.org/downloads/download.php?file=/oomph/epp/2026-09/R/eclipse-inst-jre-win64.exe",
+            "Official Eclipse IDE installer download for N-tier application development and network programming.",
         ),
-        resource(
-            "Apache NetBeans",
-            "https://getintopc.com/softwares/development/netbeans-ide-free-download/",
-            "Apache NetBeans IDE installer from Get Into PC for N-tier architectures.",
-        ),
+        _netbeans_resource(),
         resource(
             "Automgen 8",
             "https://www.irai.net/automgen/",
@@ -586,8 +594,8 @@ def _fourth_year_IRIIA_apps() -> list[Resource]:
         ),
         resource(
             "Factory I/O",
-            "https://getintopc.com/softwares/simulation/factory-io-free-download-9233633/",
-            "3D factory simulation software for PLC automation training from Get Into PC.",
+            "https://factoryio.com/download-archive/",
+            "Official Factory I/O download archive from Real Games for 3D factory simulation and PLC training.",
         ),
         resource(
             "GNS3",
@@ -633,8 +641,8 @@ def _software_tools() -> list[Resource]:
         ),
         resource(
             "QGIS",
-            "https://getintopc.com/softwares/development/qgis-free-download/",
-            "GIS spatial data application installer from Get Into PC.",
+            "https://qgis.org/download/",
+            "Official QGIS download page for open-source geographic information systems.",
         ),
     ]
 
@@ -673,11 +681,7 @@ def _third_year_ener_gh_apps() -> list[Resource]:
             "https://globalwindatlas.info/",
             "Free official wind resource assessment and wind energy potential mapping application.",
         ),
-        resource(
-            "RETScreen Expert",
-            "https://getintopc.com/softwares/simulation/retscreen-expert-free-download/",
-            "Clean energy management and renewable project feasibility software from Get Into PC.",
-        ),
+        _retscreen_resource(),
     ]
 
 
@@ -695,11 +699,7 @@ def _fifth_year_gh_apps() -> list[Resource]:
             "https://getintopc.com/softwares/3d-cad/solidworks-premium-2020-free-download/",
             "SolidWorks 3D CAD modeling software installer from Get Into PC.",
         ),
-        resource(
-            "RETScreen Expert",
-            "https://getintopc.com/softwares/simulation/retscreen-expert-free-download/",
-            "Clean energy management and renewable project feasibility software from Get Into PC.",
-        ),
+        _retscreen_resource(),
         resource(
             "Modelica (OpenModelica)",
             "https://openmodelica.org/download/download-windows/",
@@ -764,11 +764,7 @@ def _software_tools_for_specialty(specialty: str, year: int) -> list[Resource]:
                 "https://globalwindatlas.info/",
                 "Free official wind resource assessment and wind energy potential mapping application.",
             ),
-            resource(
-                "RETScreen Expert",
-                "https://getintopc.com/softwares/simulation/retscreen-expert-free-download/",
-                "Clean energy management and renewable project feasibility software from Get Into PC.",
-            ),
+            _retscreen_resource(),
             resource(
                 "HOMER Pro",
                 "https://getintopc.com/softwares/electrical-engineering/homer-pro-free-download/",
@@ -782,11 +778,7 @@ def _software_tools_for_specialty(specialty: str, year: int) -> list[Resource]:
                 "https://getintopc.com/softwares/3d-cad/solidworks-premium-2020-free-download/",
                 "SolidWorks 3D CAD modeling software installer from Get Into PC.",
             ),
-            resource(
-                "RETScreen Expert",
-                "https://getintopc.com/softwares/simulation/retscreen-expert-free-download/",
-                "Clean energy management and renewable project feasibility software from Get Into PC.",
-            ),
+            _retscreen_resource(),
         ])
     return tools
 
